@@ -16,23 +16,26 @@
   <meta name="author" content="chumeng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="最近玩的有点过头了，想趁这个暑假把微积分预习一下，省略前面高中学习过的较简单部分，从 Lecture 6 开始记录笔记，以增强印象。  指数函数求导 这节课的主要任务是求指数函数的导数，即求 \(\frac{d}{d x} a^x\)，以下是推导过程。 \(M(a)\) 的推导 根据导数的定义，有 \[ \frac{d}{d x} a^x&#x3D;\lim _{\Delta x \rightarrow 0">
+    <meta name="description" content="这两节开始有点技术含量了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MIT18.01 Lec6 指数与对数 学习笔记">
-<meta property="og:url" content="https://chumeng.xyz/MIT18-01-Lec6-%E6%8C%87%E6%95%B0%E4%B8%8E%E5%AF%B9%E6%95%B0-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记">
+<meta property="og:url" content="https://chumeng.xyz/MIT18-01-Lec27-28-%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%AF%E5%88%86%E4%B8%8E%E4%B8%89%E8%A7%92%E6%9B%BF%E6%8D%A2-%E5%8F%8D%E5%90%91%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Chumeng&#39;s blog">
-<meta property="og:description" content="最近玩的有点过头了，想趁这个暑假把微积分预习一下，省略前面高中学习过的较简单部分，从 Lecture 6 开始记录笔记，以增强印象。  指数函数求导 这节课的主要任务是求指数函数的导数，即求 \(\frac{d}{d x} a^x\)，以下是推导过程。 \(M(a)\) 的推导 根据导数的定义，有 \[ \frac{d}{d x} a^x&#x3D;\lim _{\Delta x \rightarrow 0">
+<meta property="og:description" content="这两节开始有点技术含量了">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-31T12:32:23.000Z">
-<meta property="article:modified_time" content="2024-07-31T14:40:22.465Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lihaoze123/pic/Screenshot_2024-08-05-19-49-16-523_com.jideos.jnotes.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lihaoze123/pic/tikz.svg">
+<meta property="article:published_time" content="2024-08-05T09:17:34.000Z">
+<meta property="article:modified_time" content="2024-08-05T13:20:06.371Z">
 <meta property="article:author" content="chumeng">
 <meta property="article:tag" content="微积分">
 <meta property="article:tag" content="高等数学">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lihaoze123/pic/Screenshot_2024-08-05-19-49-16-523_com.jideos.jnotes.png">
   
   
   
-  <title>MIT18.01 Lec6 指数与对数 学习笔记 - Chumeng&#39;s blog</title>
+  <title>MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记 - Chumeng&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="MIT18.01 Lec6 指数与对数 学习笔记"></span>
+            <span id="subtitle" data-typed-text="MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记"></span>
           
         </div>
 
@@ -209,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-31 20:32" pubdate>
-          2024年7月31日 晚上
+        <time datetime="2024-08-05 17:17" pubdate>
+          2024年8月5日 下午
         </time>
       </span>
     
@@ -221,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          962 字
+          1.1k 字
         
       </span>
     
@@ -232,7 +235,7 @@
         
         
         
-          9 分钟
+          10 分钟
         
       </span>
     
@@ -269,196 +272,227 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MIT18.01 Lec6 指数与对数 学习笔记</h1>
+            <h1 id="seo-header">MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <p>最近玩的有点过头了，想趁这个暑假把微积分预习一下，省略前面高中学习过的较简单部分，从
-<strong>Lecture 6</strong> 开始记录笔记，以增强印象。</p>
-<h2 id="section"></h2>
-<h2 id="指数函数求导">指数函数求导</h2>
-<p>这节课的主要任务是求指数函数的导数，即求 <span
-class="math inline">\(\frac{d}{d x} a^x\)</span>，以下是推导过程。</p>
-<h3 id="ma-的推导"><span class="math inline">\(M(a)\)</span> 的推导</h3>
-<p>根据导数的定义，有</p>
+                <p>这两节开始有点技术含量了</p>
+<span id="more"></span>
+<h1 id="三角函数的积分与三角换元">三角函数的积分与三角换元</h1>
+<h2 id="一些常见公式">一些常见公式</h2>
+<p><strong>基本公式</strong></p>
 <p><span class="math display">\[
-\frac{d}{d x} a^x=\lim _{\Delta x \rightarrow 0} \frac{a^{x+\Delta
-x}-a^x}{\Delta x}
+\boxed{\begin{aligned}
+\sin^2 \theta &amp;+ \cos^2 \theta = 1 \\
+\sec^2 \theta &amp;= 1 + \tan^2 x \\
+\cos (2 \theta) &amp;= \cos^2 \theta - \sin^2 \theta \\
+\sin (2 \theta) &amp;= 2 \sin \theta \cos \theta \\
+\end{aligned}}
 \]</span></p>
-<p>化简，有</p>
+<p><strong>半角公式</strong></p>
 <p><span class="math display">\[
-\lim _{\Delta x \rightarrow 0} \frac{a^{x+\Delta x}-a^x}{\Delta x}=\lim
-_{\Delta x \rightarrow 0} a^x \frac{a^{\Delta x}-1}{\Delta x}=a^x \lim
-_{\Delta x \rightarrow 0} \frac{a^{\Delta x}-1}{\Delta x}
+\boxed{\begin{aligned}
+\cos^2 \theta &amp;= \frac{1 + \cos(2 \theta)}{2} \\
+\sin^2 \theta &amp;= \frac{1 - \cos(2 \theta)}{2} \\
+\end{aligned}}
 \]</span></p>
-<p>不妨设多出来那一部分为魔数 <span
-class="math inline">\(M(a)\)</span>（M 即代表 Magic Number）</p>
+<p><strong>微分公式</strong></p>
 <p><span class="math display">\[
-M(a) \equiv \lim _{\Delta x \rightarrow 0} \frac{a^{\Delta x}-1}{\Delta
-x}
+\boxed{\begin{aligned}
+&amp;d\sin x = \cos x \ dx \\
+&amp;d\cos x = -\sin x \ dx \\
+&amp;d\tan x = \sec^2 x \ dx \\
+&amp;d\sec x = \sec x \ \tan x \ dx
+\end{aligned}}
 \]</span></p>
-<p>当 <span class="math inline">\(x = 0\)</span> 时，有</p>
+<p><strong>积分公式</strong></p>
 <p><span class="math display">\[
-M(a)=\lim _{\Delta x \rightarrow 0} \frac{a^{0+\Delta x}-a^0}{\Delta
-x}=\left.\frac{d}{d x} a^x\right|_{x=0}
+\boxed{\begin{aligned}
+\int \tan x \ dx &amp;= - \ln(\cos x) ＋ c \\
+\int \sec x \ dx &amp;= \int \frac{d (\sec x + \tan x)}{\sec x + \tan x}
+\\
+&amp;= \ln (\sec x + \tan x)
+\end{aligned}}
 \]</span></p>
-<p><span class="math inline">\(M(a)\)</span> 的几何意义即 <span
-class="math inline">\(a^x\)</span> 在 <span class="math inline">\(x =
-0\)</span> 处的斜率。</p>
-<h3 id="引入自然底数-e">引入自然底数 <span
-class="math inline">\(e\)</span></h3>
-<p>注意到，底数 <span class="math inline">\(a\)</span> 越大，函数 <span
-class="math inline">\(a^x\)</span> 的图像越陡，不难证明存在常数 <span
-class="math inline">\(e\)</span>，使得 <span class="math inline">\(M(e)
-= 1\)</span>。</p>
-<p>经过上面我们的推导，有</p>
+<h2 id="三角函数的积分">三角函数的积分</h2>
+<h3 id="对于形如-int-sinn-x-cosm-x-dx-的积分">对于形如 <span
+class="math inline">\(\int \sin^n x \cos^m x \ dx\)</span> 的积分</h3>
+<h4 id="n-或-m-是奇数的情况"><span class="math inline">\(n\)</span> 或
+<span class="math inline">\(m\)</span> 是奇数的情况</h4>
+<p>当遇到这种情况时，策略是利用 <span class="math inline">\(\sin^2 x +
+\cos^2 x = 1\)</span> 来代换原式中的奇数项，以下通过一个典型示例举例</p>
+<h5 id="求-int-sin3-x-cos2-x-dx">求 <span class="math inline">\(\int
+\sin^3 x \cos^2 x \ dx\)</span></h5>
+<p>对于这个式子，有</p>
 <p><span class="math display">\[
-\frac{d}{d x}\left(e^x\right)=M(e) e^x
+\int \sin ^3 x \cos ^2 x d x=\int \sin ^2 x \cos ^2 x \sin x d
+x=\int\left(1-\cos ^2 x\right) \cos ^2 x \sin x d x
 \]</span></p>
-<p>又 <span class="math inline">\(M(e) = 1\)</span>，即</p>
+<p>设 <span class="math inline">\(u = \cos x\)</span>，有 <span
+class="math inline">\(du = -sinx \ dx\)</span>，代入得</p>
 <p><span class="math display">\[
-\fbox{ $\frac{d}{d x}\left(e^x\right)=e^x$ }
+\begin{gathered}
+\operatorname{ans} = \int (1 - u^2) u^2 \ du
+\end{gathered}
 \]</span></p>
-<h3 id="引入自然对数-ln-x">引入自然对数 <span class="math inline">\(\ln
-(x)\)</span></h3>
-<p>为了更好地了解魔数 <span
-class="math inline">\(M(a)\)</span>，我们引入 <span
-class="math inline">\(\ln (x)\)</span>，它是 <span
-class="math inline">\(e^x\)</span> 的反函数，即</p>
+<p>接下来就是简单的多项式积分，把 <span class="math inline">\(u = \cos
+x\)</span> 代入原式得</p>
 <p><span class="math display">\[
-\fbox{If $y = e^x$, then $\ln(y) = x$}
+\operatorname{ans} = -\frac{1}{3} \cos^3 x + \frac{1}{5} \cos^5 x + c
 \]</span></p>
-<p>我们用 <strong>隐函数求导</strong> 求出 <span
-class="math inline">\(\frac{d}{d x} \ln(x)\)</span>，令 <span
-class="math inline">\(w = \ln(x)\)</span>，有</p>
-<p><span class="math display">\[
-\begin{aligned}
-e^w &amp; =x \\
-\frac{d}{d x}\left(e^w\right) &amp; =\frac{d}{d x}(x) \\
-\frac{d}{d w}\left(e^w\right) \frac{d w}{d x} &amp; =1 \\
-e^w \frac{d w}{d x} &amp; =1 \\
-\frac{d w}{d x} &amp; =\frac{1}{e^w}=\frac{1}{x}
-\end{aligned}
-\]</span></p>
-<p>即</p>
-<p><span class="math display">\[
-\fbox{$\frac{d}{d x} \ln(x) = \frac{1}{x}$}
-\]</span></p>
-<h3 id="求导">求导</h3>
-<p>对于指数函数 <span class="math inline">\(a^x\)</span>
-的求导，有两种方法</p>
-<h4 id="利用链式法则">利用链式法则</h4>
-<p>利用 <span class="math inline">\(e^x\)</span> 和 <span
-class="math inline">\(\ln x\)</span> 互为反函数的性质，我们将 <span
-class="math inline">\(a\)</span> 表示为 <span
-class="math inline">\(e^{(\ln a)}\)</span>，有</p>
-<p><span class="math display">\[
-a^x=\left(e^{\ln (a)}\right)^x=e^{x \ln (a)}
-\]</span></p>
-<p>所以，有</p>
+<h4 id="n-和-m-都是偶数的形式"><span class="math inline">\(n\)</span> 和
+<span class="math inline">\(m\)</span> 都是偶数的形式</h4>
+<p>当遇到这种情况时，策略是利用半角公式，例如：</p>
 <p><span class="math display">\[
 \begin{aligned}
-\frac{d}{d x} a^x &amp; = \frac{d}{d x} e^{x \ln (a)} \\
-&amp; = \ln (a) \cdot e^{x \ln (a)}
+\int \cos ^2 x \ d x &amp;=\int \frac{1+\cos 2 x}{2} d
+x=\frac{x}{2}+\frac{\sin (2 x)}{4}+c \\
+\int \sin ^2 x \ d x &amp;=\int \frac{1-\cos (2 x)}{2} d
+x=\frac{x}{2}-\frac{\sin (2 x)}{4}+c
 \end{aligned}
 \]</span></p>
-<p>即</p>
+<h3 id="对于形如-int-secn-x-tanm-x-dx-的积分">对于形如 <span
+class="math inline">\(\int \sec^n x \ \tan^m x \ dx\)</span> 的积分</h3>
+<h4 id="n-是偶数的情况"><span class="math inline">\(n\)</span>
+是偶数的情况</h4>
+<p>当遇到这种情况时，策略是利用 <span class="math inline">\(\sec^2
+\theta = 1 + \tan^2 x\)</span> 来代换原式，例如</p>
 <p><span class="math display">\[
-\fbox{$\frac{d}{d x} a^x = \ln (a) \cdot a^x$}
+\int \sec^4 x \ dx = \int (1 + \tan^2 x) \sec^2 x \ dx
 \]</span></p>
-<p>又有</p>
+<p>设 <span class="math inline">\(u = \tan x\)</span>，有 <span
+class="math inline">\(d u = \sec^2 x \ dx\)</span></p>
+<h4 id="m-是奇数的情况"><span class="math inline">\(m\)</span>
+是奇数的情况</h4>
+<p>同样是利用式子 <span class="math inline">\(\sec^2 \theta = 1 + \tan^2
+x\)</span> 代换，例如</p>
 <p><span class="math display">\[
-\frac{d}{d x} a^x = M(a) \cdot a^x
+\int \sec x \tan^3 x \ dx = \int (\sec^2 x - 1) \ \sec x \ \tan x \ dx
 \]</span></p>
-<p>现在我们知道，魔数 <span class="math inline">\(M(a)\)</span> 即为
-<span class="math inline">\(\ln(a)\)</span>。</p>
-<h3 id="利用对数微分">利用对数微分</h3>
-<p>相对于寻找原函数的导数，对数微分有时候更为简单，它同样是利用
-<strong>隐函数求导</strong>。</p>
-<p>我们令 <span class="math inline">\(u = f(x)\)</span>，有</p>
+<p>设 <span class="math inline">\(u = \sec x\)</span>，有 <span
+class="math inline">\(du = \sec x \ \tan x \ dx\)</span></p>
+<h4 id="n-1-m-0-的情况"><span class="math inline">\(n = 1, m =
+0\)</span> 的情况</h4>
+<p>对于 <span class="math inline">\(\int \sec x \
+dx\)</span>，需要利用一点点 ”人类智慧“（这门课的教授称之为
+”高级猜测“）。</p>
+<p>注意到，<span class="math inline">\(\frac{d}{dx} (\sec x + \tan x) =
+\sec x \ (\sec x + \tan x)\)</span>，于是</p>
 <p><span class="math display">\[
-\frac{d}{d x} \ln u = \frac{d}{d u} \ln u \cdot \frac{d u}{d x} =
-\frac{1}{u} \cdot \frac{d u}{d x} = \frac{u&#39;}{u}
+\operatorname{ans} = \int \frac{d (\sec x + \tan x)}{\sec x + \tan x} =
+\ln(\sec x + \tan x) + c
 \]</span></p>
-<p>即</p>
+<h2 id="三角换元">三角换元</h2>
+<p>对于一个半径为 <span class="math inline">\(a\)</span>
+的圆，当我们需要求如图阴影部分的面积时</p>
+<p><img title="" src="https://cdn.jsdelivr.net/gh/lihaoze123/pic/Screenshot_2024-08-05-19-49-16-523_com.jideos.jnotes.png" srcset="/img/loading.gif" lazyload alt="" width="359" data-align="center"></p>
+<p>可以使用积分 <span class="math inline">\(\int_{t = 0}^{t = x}
+\sqrt{a^2 - t^2} \ dt\)</span>。</p>
+<p>令 <span class="math inline">\(t = a \sin u\)</span>，有 <span
+class="math inline">\(d t = a \cos u \ d u\)</span>，<span
+class="math inline">\(\sqrt{a^2 - t^2} = a \cos u\)</span></p>
+<p>代入，有</p>
 <p><span class="math display">\[
-f&#39; = f \cdot (\ln f)&#39;
+\int_0^x \sqrt{a^2 - t^2} \ dt = a^2 \int_{u = 0}^{u =
+\sin^{-1}(\frac{x}{a})} \cos^2 u \ du = a^2 (\frac{u}{2} + \frac{\sin u
+\cos u}{2}) |_0^{\sin^{-1}(\frac{x}{a})}
 \]</span></p>
-<p>于是，对于 <span class="math inline">\(f(x) = a^x\)</span>，有</p>
-<p><span class="math display">\[
-\frac{d}{d x} (\ln f) = \frac{d}{d x} (x \cdot \ln a) = \ln a
-\]</span></p>
-<p>即</p>
-<p><span class="math display">\[
-f&#39; = f \cdot (\ln f)&#39; = a^x \cdot \ln a
-\]</span></p>
-<h2 id="例题">例题</h2>
-<ul>
-<li><span class="math inline">\(\frac{d}{d x} (x^x) = \ ?\)</span></li>
-</ul>
-<p>利用对数微分，其中</p>
+<p>对于形如 <span class="math inline">\(\cos \sin^{-1}
+\frac{x}{a}\)</span>
+的式子，可以画一个直角三角形，通过画图可以直观地求解：</p>
+<p><img title="" src="https://cdn.jsdelivr.net/gh/lihaoze123/pic/tikz.svg" srcset="/img/loading.gif" lazyload alt="" width="291" data-align="center"></p>
+<p>如图，不难看出 <span class="math inline">\(\cos \sin^{-1} \frac{x}{a}
+= \frac{\sqrt{a^2 - x^2}}{a}\)</span>。</p>
+<p>代入原式，得</p>
 <p><span class="math display">\[
 \begin{aligned}
-f &amp; =x^x \\
-\ln f &amp; =x \ln x \\
-(\ln f)^{\prime} &amp; =1 \cdot(\ln x)+x\left(\frac{1}{x}\right)=\ln
-(x)+1
+\operatorname{ans} &amp;= a^2 (\frac{\sin^{-1}(\frac{x}{a})}{2} +
+\frac{1}{2} \frac{x}{a} \frac{\sqrt{a^2 - x^2}}{a}) \\
+&amp;= \frac{a^2}{2} \sin^{-1}(\frac{x}{a}) + \frac{1}{2} x \sqrt{a^2 -
+x^2}
 \end{aligned}
 \]</span></p>
-<p>代入上面的结论，有</p>
+<h4 id="可以用三角换元计算的积分">可以用三角换元计算的积分</h4>
+<table>
+
+<thead>
+<tr>
+<th style="text-align: center;">积分</th>
+<th style="text-align: center;">换元</th>
+<th style="text-align: center;">对应的三角恒等式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\displaystyle\int \frac{d x}{\sqrt{x^2 +
+1}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x = \tan
+u\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\tan^2 u + 1
+= \sec^2 u\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\displaystyle\int \frac{d x}{\sqrt{x^2 -
+1}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x = \sec
+u\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\sec^2 u - 1
+= \tan^2 u\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\displaystyle\int \frac{d x}{\sqrt{1 -
+x^2}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x = \sin
+u\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\sin^2 u +
+\cos^2 u = 1\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="使用配方求解较为复杂的积分">使用配方求解较为复杂的积分</h3>
+<h4 id="求-int-fracd-xsqrtx2-4x">求 <span class="math inline">\(\int
+\frac{d x}{\sqrt{x^2 + 4x}}\)</span></h4>
+<p>对下面的二次项配方，有</p>
 <p><span class="math display">\[
-f&#39; = f \cdot (\ln f)&#39; = x^x \cdot (\ln (x)+1)
+\int \frac{d x}{\sqrt{x^2+4 x}}=\int \frac{d x}{\sqrt{(x+2)^2-4}}=\int
+\frac{d x}{2 \sqrt{\left(\frac{x}{2}+1\right)^2-1}}
 \]</span></p>
-<ul>
-<li><p><span class="math inline">\(\lim_{k \to \infty} (1 +
-\frac{1}{k})^k = \ ?\)</span></p>
-<p>同样取对数简化运算，有</p>
+<p>设 <span class="math inline">\(u = \frac{x}{2} + 1\)</span>，有 <span
+class="math inline">\(d u = \frac{d x}{2}\)</span>，代入得</p>
 <p><span class="math display">\[
-\ln (1 + \frac{1}{k})^k = k \cdot \ln (1 + \frac{1}{k})
+\operatorname{ans} = \int \frac{d u}{\sqrt{u^2 - 1}}
 \]</span></p>
-<p>这里利用一个 <em>trick</em>，令 <span class="math inline">\(\Delta
-x\)</span> 表示 <span class="math inline">\(\frac{1}{k}\)</span>，有</p>
+<p>利用上面表格中的结论，我们设 <span class="math inline">\(\sec v =
+u\)</span>，有 <span class="math inline">\(\sec v \tan v \ d v = d
+u\)</span>，继续代入，有</p>
 <p><span class="math display">\[
 \begin{aligned}
-\lim_{k \to \infty} \ln (1 + \frac{1}{k})^k &amp; = \lim_{k \to \infty}
-k \cdot \ln (1 + \frac{1}{k}) \\
-&amp; = \lim_{\Delta x \to 0} \frac{\ln (1 + \Delta x)}{\Delta x}
+\operatorname{ans} &amp; =\int \frac{\sec v \tan v \ d v}{\tan v} \\
+&amp; =\int \sec v \ d v
 \end{aligned}
 \]</span></p>
-<p>再利用一个 <em>trick</em>，注意到 <span class="math inline">\(\ln 1 =
-0\)</span>（人类智慧，maybe），有</p>
+<p>继续利用前面得到的结论，我们得到最终结果</p>
 <p><span class="math display">\[
-\lim_{\Delta x \to 0} \frac{\ln (1 + \Delta x)}{\Delta x} = \lim_{\Delta
-x \to 0} \frac{\ln (1 + \Delta x) - \ln 1}{\Delta x}
+\operatorname{ans} = \ln(\sec v + \tan v) + c
 \]</span></p>
-<p>由导数的定义，即</p>
+<p>同样利用上面我们用过的绘图的方法，我们知道 <span
+class="math inline">\(\tan v = \sqrt{u^2 - 1}\)</span>，反向替换，得</p>
 <p><span class="math display">\[
-\lim_{k \to \infty} (1 + \frac{1}{k})^k = e^{\frac{d}{d x} \ln x |_{x =
-1}} = e^{\frac{1}{x} |_{x = 1}} = e
+\begin{aligned}
+\operatorname{ans} &amp; = \ln(u + \sqrt{u^2 - 1}) + c \\
+&amp; = \ln \left(\frac{x}{2} + 1 + \sqrt{\frac{x^2}{4} + x} \right) + c
+\end{aligned}
 \]</span></p>
-<p>利用求出的式子，可以估算出自然底数 <span
-class="math inline">\(e\)</span>。</p></li>
-<li><p>幂函数求导<br />
-对于幂为实数，利用上述对数微分可以简便地推导出求导公式。<br />
-由上知，<span class="math inline">\(f&#39; = f \cdot (\ln
-f)&#39;\)</span>，对于 <span class="math inline">\(f(x) =
-x^a\)</span>，有</p>
+<p>进一步地，我们将 <span class="math inline">\(\ln\)</span> 中的 <span
+class="math inline">\(\frac{1}{2}\)</span> 提出来，得到最终的结果</p>
 <p><span class="math display">\[
-(x^a)&#39; = x^a \cdot (a \ln x)&#39; = x^a \cdot \frac{a}{x} = a \cdot
-x^{a - 1}
+\fbox{$\ln(x + 2 + \sqrt{x^2 + 4 x}) + \tilde{c}$}
 \]</span></p>
-<h2 id="参考资料">参考资料</h2></li>
-<li><p>课件 <a
-target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/resources/lec6/">Lecture
-6: Exponential and Log, Logarithmic Differentiation, Hyperbolic
-Functions | Single Variable Calculus | Mathematics | MIT
-OpenCourseWare</a></p></li>
-<li><p>视频 <a
-target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/resources/lecture-6-exponential-and-log/">Lecture
-6: Exponential and Log | Single Variable Calculus | Mathematics | MIT
-OpenCourseWare</a></p></li>
-</ul>
+<p>其中 <span class="math inline">\(\tilde{c} = c - \ln 2\)</span>。</p>
 
                 
               </div>
@@ -485,8 +519,8 @@ OpenCourseWare</a></p></li>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MIT18.01 Lec6 指数与对数 学习笔记</div>
-      <div>https://chumeng.xyz/MIT18-01-Lec6-指数与对数-学习笔记/</div>
+      <div>MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记</div>
+      <div>https://chumeng.xyz/MIT18-01-Lec27-28-三角函数的积分与三角替换-反向变量替换-学习笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -498,7 +532,7 @@ OpenCourseWare</a></p></li>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月31日</div>
+          <div>2024年8月5日</div>
         </div>
       
       
@@ -530,18 +564,12 @@ OpenCourseWare</a></p></li>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/MIT18-01-Lec27-28-%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%AF%E5%88%86%E4%B8%8E%E4%B8%89%E8%A7%92%E6%9B%BF%E6%8D%A2-%E5%8F%8D%E5%90%91%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/%E5%A6%82%E4%BD%95%E6%84%89%E5%BF%AB%E5%9C%B0%E5%9C%A8-Linux-%E4%B8%8B%E8%A7%82%E7%9C%8B%E5%B8%A6%E5%BC%B9%E5%B9%95%E7%9A%84%E7%95%AA%E5%89%A7/" title="如何愉快地在 Linux 下观看带弹幕的番剧">
-                        <span class="hidden-mobile">如何愉快地在 Linux 下观看带弹幕的番剧</span>
+                      <a href="/MIT18-01-Lec6-%E6%8C%87%E6%95%B0%E4%B8%8E%E5%AF%B9%E6%95%B0-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MIT18.01 Lec6 指数与对数 学习笔记">
+                        <span class="hidden-mobile">MIT18.01 Lec6 指数与对数 学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
