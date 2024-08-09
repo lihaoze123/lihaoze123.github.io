@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>MIT18.06 Lec2 矩阵消元 学习笔记</title>
+    <link href="/MIT18-06-Lec2-%E7%9F%A9%E9%98%B5%E6%B6%88%E5%85%83-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <url>/MIT18-06-Lec2-%E7%9F%A9%E9%98%B5%E6%B6%88%E5%85%83-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="消元法">消元法</h2><p>消元法可以用于求解线性方程组，本节课的例子是一个三元一次方程组：</p><p><span class="math display">\[\begin{cases}    x + 2y + z &amp;= 2 \\    3x + 8y + z &amp;= 12 \\    4y + z &amp;= 2 \\\end{cases}\]</span></p><p>将方程组写成矩阵形式：</p><p><span class="math display">\[A = \begin{bmatrix} 1 &amp; 2 &amp; 1 \\ 3 &amp; 8 &amp; 1 \\ 0 &amp; 4&amp; 1 \end{bmatrix} \qquad b = \begin{bmatrix} 2 \\ 12 \\ 2\end{bmatrix}\]</span></p><p>首先是<strong>消元</strong>，先选左上角的数为主元，然后将下面的系数消为0，接下来对第二行同理：</p><p><span class="math display">\[A = \begin{bmatrix} \ \fbox{1} &amp; 2 &amp; 1 \\ 3 &amp; 8 &amp; 1 \\ 0&amp; 4 &amp; 1 \end{bmatrix}\rightarrow \begin{bmatrix} \ \fbox{1} &amp; 2 &amp; 1 \\ 0 &amp;\fbox{2} &amp; -2 \\ 0 &amp; 4 &amp; 1 \end{bmatrix}\rightarrow u = \begin{bmatrix} \ \fbox{1} &amp; 2 &amp; 1 \\ 0 &amp;\fbox{2} &amp; -2 \\ 0 &amp; 0 &amp; \fbox{5} \ \end{bmatrix}\]</span></p><p>对于向量 <spanclass="math inline">\(b\)</span>，也进行同样的操作，得到向量 <spanclass="math inline">\(c = \begin{bmatrix} 2 \\ 6 \\ -10\end{bmatrix}\)</span>，得到一个新等式 <span class="math inline">\(u\mathbf{x} = c\)</span>。</p><p>接下来是 <strong>回代</strong>，从最后一行开始，得到 <spanclass="math inline">\(z = -2\)</span>，然后代入到第二行，得到 <spanclass="math inline">\(y = 3\)</span>，最后代入到第一行，得到 <spanclass="math inline">\(x = 1\)</span>：</p><p><span class="math display">\[\begin{cases}    x + 2y + z &amp;= 2 &amp;\rightarrow x = 2 \\    3x + 8y + z &amp;= 12 &amp;\rightarrow y = 3 \\    4y + z &amp;= 2 &amp;\rightarrow z = -2\end{cases}\]</span></p><h2 id="利用矩阵消元">利用矩阵消元</h2><p>为了利用矩阵消元，我们引入一个初等矩阵 <spanclass="math inline">\(E\)</span>，对于上述消元的第一步操作，我们可以引入：</p><p><span class="math display">\[E = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ -3 &amp; 1 &amp; 0 \\ 0 &amp; 0&amp; 1 \end{bmatrix}\]</span></p><p>利用矩阵乘法，我们可以得到：</p><p><span class="math display">\[\begin{bmatrix} 1 &amp; 0 &amp; 0 \\ -3 &amp; 1 &amp; 0 \\ 0 &amp; 0&amp; 1 \end{bmatrix} \begin{bmatrix} 1 &amp; 2 &amp; 1 \\ 3 &amp; 8&amp; 1 \\ 0 &amp; 4 &amp; 1 \end{bmatrix} = \begin{bmatrix} 1 &amp; 2&amp; 1 \\ 0 &amp; 2 &amp; -2 \\ 0 &amp; 4 &amp; 1 \end{bmatrix}\]</span></p><p>同理，有：</p><p><span class="math display">\[\begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; -2&amp; 1 \end{bmatrix} \begin{bmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 2&amp; -2 \\ 0 &amp; 4 &amp; 1 \end{bmatrix} = \begin{bmatrix} 1 &amp; 2&amp; 1 \\ 0 &amp; 2 &amp; -2 \\ 0 &amp; 0 &amp; 5 \end{bmatrix}\]</span></p><p>用一个等式表示上述操作：</p><p><span class="math display">\[E_{32} (E_{21} A)  = u\]</span></p><p>利用结合率，我们可以得到一个消元矩阵 <spanclass="math inline">\(E\)</span>，通过一步乘法操作，将 <spanclass="math inline">\(A\)</span> 变为 <spanclass="math inline">\(u\)</span>：</p><p><span class="math display">\[E = E_{32} E_{21} = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ -3 &amp; 1&amp; 0 \\ 6 &amp; -2 &amp; 1 \end{bmatrix}\]</span></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>线性代数</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>MIT18.06 Lec1 线性代数的几何表示 学习笔记</title>
     <link href="/MIT18-06-Lec1-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E5%87%A0%E4%BD%95%E8%A1%A8%E7%A4%BA-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <url>/MIT18-06-Lec1-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E5%87%A0%E4%BD%95%E8%A1%A8%E7%A4%BA-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
