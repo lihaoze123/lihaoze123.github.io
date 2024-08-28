@@ -1,0 +1,861 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/mai.jpg">
+  <link rel="icon" href="/img/mai.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="chumeng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="最近玩的有点过头了，想趁这个暑假把微积分预习一下，省略前面高中学习过的较简单部分，从 Lecture 6 开始记录笔记，以增强印象。  指数函数求导 这节课的主要任务是求指数函数的导数，即求 \(\frac{d}{d x} a^x\)，以下是推导过程。 \(M(a)\) 的推导 根据导数的定义，有 \[ \frac{d}{d x} a^x&#x3D;\lim _{\Delta x \rightarrow 0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT18.01 Lec6 指数与对数 学习笔记">
+<meta property="og:url" content="https://chumeng.xyz/MIT18-01-Lec6-%E6%8C%87%E6%95%B0%E4%B8%8E%E5%AF%B9%E6%95%B0-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Chumeng&#39;s blog">
+<meta property="og:description" content="最近玩的有点过头了，想趁这个暑假把微积分预习一下，省略前面高中学习过的较简单部分，从 Lecture 6 开始记录笔记，以增强印象。  指数函数求导 这节课的主要任务是求指数函数的导数，即求 \(\frac{d}{d x} a^x\)，以下是推导过程。 \(M(a)\) 的推导 根据导数的定义，有 \[ \frac{d}{d x} a^x&#x3D;\lim _{\Delta x \rightarrow 0">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-31T12:32:23.000Z">
+<meta property="article:modified_time" content="2024-08-28T12:04:28.501Z">
+<meta property="article:author" content="chumeng">
+<meta property="article:tag" content="微积分">
+<meta property="article:tag" content="高等数学">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>MIT18.01 Lec6 指数与对数 学习笔记 - Chumeng&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chumeng.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>初梦</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MIT18.01 Lec6 指数与对数 学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-31 20:32" pubdate>
+          2024年7月31日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          962 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">MIT18.01 Lec6 指数与对数 学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近玩的有点过头了，想趁这个暑假把微积分预习一下，省略前面高中学习过的较简单部分，从
+<strong>Lecture 6</strong> 开始记录笔记，以增强印象。</p>
+<h2 id="section"></h2>
+<h2 id="指数函数求导">指数函数求导</h2>
+<p>这节课的主要任务是求指数函数的导数，即求 <span
+class="math inline">\(\frac{d}{d x} a^x\)</span>，以下是推导过程。</p>
+<h3 id="ma-的推导"><span class="math inline">\(M(a)\)</span> 的推导</h3>
+<p>根据导数的定义，有</p>
+<p><span class="math display">\[
+\frac{d}{d x} a^x=\lim _{\Delta x \rightarrow 0} \frac{a^{x+\Delta
+x}-a^x}{\Delta x}
+\]</span></p>
+<p>化简，有</p>
+<p><span class="math display">\[
+\lim _{\Delta x \rightarrow 0} \frac{a^{x+\Delta x}-a^x}{\Delta x}=\lim
+_{\Delta x \rightarrow 0} a^x \frac{a^{\Delta x}-1}{\Delta x}=a^x \lim
+_{\Delta x \rightarrow 0} \frac{a^{\Delta x}-1}{\Delta x}
+\]</span></p>
+<p>不妨设多出来那一部分为魔数 <span
+class="math inline">\(M(a)\)</span>（M 即代表 Magic Number）</p>
+<p><span class="math display">\[
+M(a) \equiv \lim _{\Delta x \rightarrow 0} \frac{a^{\Delta x}-1}{\Delta
+x}
+\]</span></p>
+<p>当 <span class="math inline">\(x = 0\)</span> 时，有</p>
+<p><span class="math display">\[
+M(a)=\lim _{\Delta x \rightarrow 0} \frac{a^{0+\Delta x}-a^0}{\Delta
+x}=\left.\frac{d}{d x} a^x\right|_{x=0}
+\]</span></p>
+<p><span class="math inline">\(M(a)\)</span> 的几何意义即 <span
+class="math inline">\(a^x\)</span> 在 <span class="math inline">\(x =
+0\)</span> 处的斜率。</p>
+<h3 id="引入自然底数-e">引入自然底数 <span
+class="math inline">\(e\)</span></h3>
+<p>注意到，底数 <span class="math inline">\(a\)</span> 越大，函数 <span
+class="math inline">\(a^x\)</span> 的图像越陡，不难证明存在常数 <span
+class="math inline">\(e\)</span>，使得 <span class="math inline">\(M(e)
+= 1\)</span>。</p>
+<p>经过上面我们的推导，有</p>
+<p><span class="math display">\[
+\frac{d}{d x}\left(e^x\right)=M(e) e^x
+\]</span></p>
+<p>又 <span class="math inline">\(M(e) = 1\)</span>，即</p>
+<p><span class="math display">\[
+\fbox{ $\frac{d}{d x}\left(e^x\right)=e^x$ }
+\]</span></p>
+<h3 id="引入自然对数-ln-x">引入自然对数 <span class="math inline">\(\ln
+(x)\)</span></h3>
+<p>为了更好地了解魔数 <span
+class="math inline">\(M(a)\)</span>，我们引入 <span
+class="math inline">\(\ln (x)\)</span>，它是 <span
+class="math inline">\(e^x\)</span> 的反函数，即</p>
+<p><span class="math display">\[
+\fbox{If $y = e^x$, then $\ln(y) = x$}
+\]</span></p>
+<p>我们用 <strong>隐函数求导</strong> 求出 <span
+class="math inline">\(\frac{d}{d x} \ln(x)\)</span>，令 <span
+class="math inline">\(w = \ln(x)\)</span>，有</p>
+<p><span class="math display">\[
+\begin{aligned}
+e^w &amp; =x \\
+\frac{d}{d x}\left(e^w\right) &amp; =\frac{d}{d x}(x) \\
+\frac{d}{d w}\left(e^w\right) \frac{d w}{d x} &amp; =1 \\
+e^w \frac{d w}{d x} &amp; =1 \\
+\frac{d w}{d x} &amp; =\frac{1}{e^w}=\frac{1}{x}
+\end{aligned}
+\]</span></p>
+<p>即</p>
+<p><span class="math display">\[
+\fbox{$\frac{d}{d x} \ln(x) = \frac{1}{x}$}
+\]</span></p>
+<h3 id="求导">求导</h3>
+<p>对于指数函数 <span class="math inline">\(a^x\)</span>
+的求导，有两种方法</p>
+<h4 id="利用链式法则">利用链式法则</h4>
+<p>利用 <span class="math inline">\(e^x\)</span> 和 <span
+class="math inline">\(\ln x\)</span> 互为反函数的性质，我们将 <span
+class="math inline">\(a\)</span> 表示为 <span
+class="math inline">\(e^{(\ln a)}\)</span>，有</p>
+<p><span class="math display">\[
+a^x=\left(e^{\ln (a)}\right)^x=e^{x \ln (a)}
+\]</span></p>
+<p>所以，有</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{d}{d x} a^x &amp; = \frac{d}{d x} e^{x \ln (a)} \\
+&amp; = \ln (a) \cdot e^{x \ln (a)}
+\end{aligned}
+\]</span></p>
+<p>即</p>
+<p><span class="math display">\[
+\fbox{$\frac{d}{d x} a^x = \ln (a) \cdot a^x$}
+\]</span></p>
+<p>又有</p>
+<p><span class="math display">\[
+\frac{d}{d x} a^x = M(a) \cdot a^x
+\]</span></p>
+<p>现在我们知道，魔数 <span class="math inline">\(M(a)\)</span> 即为
+<span class="math inline">\(\ln(a)\)</span>。</p>
+<h3 id="利用对数微分">利用对数微分</h3>
+<p>相对于寻找原函数的导数，对数微分有时候更为简单，它同样是利用
+<strong>隐函数求导</strong>。</p>
+<p>我们令 <span class="math inline">\(u = f(x)\)</span>，有</p>
+<p><span class="math display">\[
+\frac{d}{d x} \ln u = \frac{d}{d u} \ln u \cdot \frac{d u}{d x} =
+\frac{1}{u} \cdot \frac{d u}{d x} = \frac{u&#39;}{u}
+\]</span></p>
+<p>即</p>
+<p><span class="math display">\[
+f&#39; = f \cdot (\ln f)&#39;
+\]</span></p>
+<p>于是，对于 <span class="math inline">\(f(x) = a^x\)</span>，有</p>
+<p><span class="math display">\[
+\frac{d}{d x} (\ln f) = \frac{d}{d x} (x \cdot \ln a) = \ln a
+\]</span></p>
+<p>即</p>
+<p><span class="math display">\[
+f&#39; = f \cdot (\ln f)&#39; = a^x \cdot \ln a
+\]</span></p>
+<h2 id="例题">例题</h2>
+<ul>
+<li><span class="math inline">\(\frac{d}{d x} (x^x) = \ ?\)</span></li>
+</ul>
+<p>利用对数微分，其中</p>
+<p><span class="math display">\[
+\begin{aligned}
+f &amp; =x^x \\
+\ln f &amp; =x \ln x \\
+(\ln f)^{\prime} &amp; =1 \cdot(\ln x)+x\left(\frac{1}{x}\right)=\ln
+(x)+1
+\end{aligned}
+\]</span></p>
+<p>代入上面的结论，有</p>
+<p><span class="math display">\[
+f&#39; = f \cdot (\ln f)&#39; = x^x \cdot (\ln (x)+1)
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\lim_{k \to \infty} (1 +
+\frac{1}{k})^k = \ ?\)</span></p>
+<p>同样取对数简化运算，有</p>
+<p><span class="math display">\[
+\ln (1 + \frac{1}{k})^k = k \cdot \ln (1 + \frac{1}{k})
+\]</span></p>
+<p>这里利用一个 <em>trick</em>，令 <span class="math inline">\(\Delta
+x\)</span> 表示 <span class="math inline">\(\frac{1}{k}\)</span>，有</p>
+<p><span class="math display">\[
+\begin{aligned}
+\lim_{k \to \infty} \ln (1 + \frac{1}{k})^k &amp; = \lim_{k \to \infty}
+k \cdot \ln (1 + \frac{1}{k}) \\
+&amp; = \lim_{\Delta x \to 0} \frac{\ln (1 + \Delta x)}{\Delta x}
+\end{aligned}
+\]</span></p>
+<p>再利用一个 <em>trick</em>，注意到 <span class="math inline">\(\ln 1 =
+0\)</span>（人类智慧，maybe），有</p>
+<p><span class="math display">\[
+\lim_{\Delta x \to 0} \frac{\ln (1 + \Delta x)}{\Delta x} = \lim_{\Delta
+x \to 0} \frac{\ln (1 + \Delta x) - \ln 1}{\Delta x}
+\]</span></p>
+<p>由导数的定义，即</p>
+<p><span class="math display">\[
+\lim_{k \to \infty} (1 + \frac{1}{k})^k = e^{\frac{d}{d x} \ln x |_{x =
+1}} = e^{\frac{1}{x} |_{x = 1}} = e
+\]</span></p>
+<p>利用求出的式子，可以估算出自然底数 <span
+class="math inline">\(e\)</span>。</p></li>
+<li><p>幂函数求导<br />
+对于幂为实数，利用上述对数微分可以简便地推导出求导公式。<br />
+由上知，<span class="math inline">\(f&#39; = f \cdot (\ln
+f)&#39;\)</span>，对于 <span class="math inline">\(f(x) =
+x^a\)</span>，有</p>
+<p><span class="math display">\[
+(x^a)&#39; = x^a \cdot (a \ln x)&#39; = x^a \cdot \frac{a}{x} = a \cdot
+x^{a - 1}
+\]</span></p>
+<h2 id="参考资料">参考资料</h2></li>
+<li><p>课件 <a
+target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/resources/lec6/">Lecture
+6: Exponential and Log, Logarithmic Differentiation, Hyperbolic
+Functions | Single Variable Calculus | Mathematics | MIT
+OpenCourseWare</a></p></li>
+<li><p>视频 <a
+target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/resources/lecture-6-exponential-and-log/">Lecture
+6: Exponential and Log | Single Variable Calculus | Mathematics | MIT
+OpenCourseWare</a></p></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/" class="print-no-link">#微积分</a>
+      
+        <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" class="print-no-link">#高等数学</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MIT18.01 Lec6 指数与对数 学习笔记</div>
+      <div>https://chumeng.xyz/MIT18-01-Lec6-指数与对数-学习笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>chumeng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/MIT18-01-Lec27-28-%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%AF%E5%88%86%E4%B8%8E%E4%B8%89%E8%A7%92%E6%9B%BF%E6%8D%A2-%E5%8F%8D%E5%90%91%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E5%A6%82%E4%BD%95%E6%84%89%E5%BF%AB%E5%9C%B0%E5%9C%A8-Linux-%E4%B8%8B%E8%A7%82%E7%9C%8B%E5%B8%A6%E5%BC%B9%E5%B9%95%E7%9A%84%E7%95%AA%E5%89%A7/" title="如何愉快地在 Linux 下观看带弹幕的番剧">
+                        <span class="hidden-mobile">如何愉快地在 Linux 下观看带弹幕的番剧</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

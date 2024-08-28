@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/mai.jpg">
+  <link rel="icon" href="/img/mai.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="chumeng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="自从之前把主系统换到 Arch Linux 之后，Windows 下的一些常规操作都不能，即使是基本的听歌&#x2F;追番的体验也很差[1]。 在尝试了半天用 Wine 安装 dandanplay（依赖问题不会解决），使用开源方案 KikoPlay （目前 AUR 上面的版本在 Wayland 显示协议下有谜之窗口分离问题，且目前版本无法添加巴哈姆特的弹幕）之后，我选择了使用脚本从 弹弹play API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何愉快地在 Linux 下观看带弹幕的番剧">
+<meta property="og:url" content="https://chumeng.xyz/%E5%A6%82%E4%BD%95%E6%84%89%E5%BF%AB%E5%9C%B0%E5%9C%A8-Linux-%E4%B8%8B%E8%A7%82%E7%9C%8B%E5%B8%A6%E5%BC%B9%E5%B9%95%E7%9A%84%E7%95%AA%E5%89%A7/index.html">
+<meta property="og:site_name" content="Chumeng&#39;s blog">
+<meta property="og:description" content="自从之前把主系统换到 Arch Linux 之后，Windows 下的一些常规操作都不能，即使是基本的听歌&#x2F;追番的体验也很差[1]。 在尝试了半天用 Wine 安装 dandanplay（依赖问题不会解决），使用开源方案 KikoPlay （目前 AUR 上面的版本在 Wayland 显示协议下有谜之窗口分离问题，且目前版本无法添加巴哈姆特的弹幕）之后，我选择了使用脚本从 弹弹play API">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-27T09:08:03.000Z">
+<meta property="article:modified_time" content="2024-08-28T12:04:28.502Z">
+<meta property="article:author" content="chumeng">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="动漫">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>如何愉快地在 Linux 下观看带弹幕的番剧 - Chumeng&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chumeng.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>初梦</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="如何愉快地在 Linux 下观看带弹幕的番剧"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-27 17:08" pubdate>
+          2024年7月27日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">如何愉快地在 Linux 下观看带弹幕的番剧</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img
+src="https://cdn.jsdelivr.net/gh/lihaoze123/pic/2024-07-27-173810_screenshot.png" srcset="/img/loading.gif" lazyload /></p>
+<p>自从之前把主系统换到 Arch Linux 之后，Windows
+下的一些常规操作都不能，即使是基本的听歌/追番的体验也很差<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="见 https://chumeng.xyz/%E5%9C%A8-Arch-%E4%B8%8A%E4%BD%BF%E7%94%A8-Wine-%E6%9D%A5%E8%BF%90%E8%A1%8C-Lyricify-4-%E6%98%BE%E7%A4%BA%E6%AD%8C%E8%AF%8D/">[1]</span></a></sup>。</p>
+<p>在尝试了半天用 Wine 安装 dandanplay（依赖问题不会解决），使用开源方案
+KikoPlay （目前 AUR 上面的版本在 Wayland
+显示协议下有谜之窗口分离问题，且目前版本无法添加巴哈姆特的弹幕）之后，我选择了使用脚本从
+<a target="_blank" rel="noopener" href="https://api.dandanplay.net/swagger/ui/index">弹弹play API</a>
+获取弹幕，再转换成 mpv 播放器能用的 ASS 字幕格式的方案。</p>
+<h2 id="从-弹弹play-api-获取弹幕">从 弹弹play API 获取弹幕</h2>
+<p>具体的 API 接口说明见 <a
+target="_blank" rel="noopener" href="https://api.dandanplay.net/swagger/ui/index">弹弹play
+API</a>。</p>
+<h3 id="获取剧集的弹幕库编号">获取剧集的弹幕库编号</h3>
+<p>调用这个 API <code>/api/v2/search/episodes</code> 以搜索剧集的
+<code>episodeId</code> （单集所对应的弹幕库编号）。</p>
+<p>示例，在命令行使用 <code>curl</code> 搜索 <code>邻座艾莉</code>
+这部动漫，使用命令行工具 <code>jq</code> 可以直观地解析
+<code>json</code> 文本以获取单集对应的 <code>episodeId</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -s -X GET --header <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> --data-urlencode <span class="hljs-string">&quot;anime=邻座艾莉&quot;</span> <span class="hljs-string">&#x27;https://api.dandanplay.net/api/v2/search/episodes&#x27;</span> | jq <span class="hljs-string">&#x27;.animes.[].episodes&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>我们会得到这样的文本：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;episodeId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">179140001</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;episodeTitle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;第1话 用俄语说真心话的艾莉同学&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;episodeId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">179140002</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;episodeTitle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;第2话 何为青梅竹马？&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;episodeId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">179140003</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;episodeTitle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;第3话 于是他们相遇了&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;episodeId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">179140004</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;episodeTitle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;第4话 满溢而出的感情&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;episodeId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">179140005</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;episodeTitle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;第5话&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;episodeId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">179140006</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;episodeTitle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;第6话&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;episodeId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">179140007</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;episodeTitle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;第7话&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;episodeId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">179140008</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;episodeTitle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;第8话&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+<p>其中的 <code>episodeId</code> 对应的就是单集的弹幕库编号。</p>
+<h3 id="获取指定弹幕库的弹幕">获取指定弹幕库的弹幕</h3>
+<p>利用以上获取的 <code>episodeId</code>，可以调用这个 API
+<code>/api/v2/comment/&#123;episodeId&#125;</code> 以获取该集所对应的弹幕。</p>
+<p>以下以第一集为例（<code>179140001</code>）：</p>
+<p>使用 <code>curl</code> 调用该接口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -sL -X GET <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> <span class="hljs-string">&#x27;https://api.dandanplay.net/api/v2/comment/179140001/?withRelated=true&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>其中 <code>withRelated</code> 参数可以获取除 <code>dandanplay</code>
+的弹幕库以外的弹幕。</p>
+<p>我们会得到形如这样的 <code>json</code> 文本：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;count&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>count<span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;comments&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;cid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>cid<span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;p&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&#123;time&#125;, &#123;mode&#125;, &#123;color&#125;, &#123;uid&#125;&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;m&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&#123;content&#125;&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<p>其中，<code>p</code> 参数格式为
+<code>出现时间,模式,颜色,用户ID</code>：</p>
+<ul>
+<li>弹幕出现时间：格式为
+0.00，单位为秒，精确到小数点后两位，例如12.34、445.6、789.01</li>
+<li>弹幕模式：1-普通弹幕，4-底部弹幕，5-顶部弹幕</li>
+<li>颜色：32位整数表示的颜色，算法为
+Rx256x256+Gx256+B，R/G/B的范围应是0-255</li>
+<li>用户ID：字符串形式表示的用户ID，通常为数字，不会包含特殊字符</li>
+</ul>
+<h2 id="将-弹弹play-api-中获取的弹幕转换为-acfun-弹幕格式">将 弹弹play
+API 中获取的弹幕转换为 AcFun 弹幕格式</h2>
+<p>AcFun 弹幕格式是形如这样的 <code>json</code> 文本：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;c&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&#123;start_time&#125;, &#123;color&#125;, &#123;mode&#125;, &#123;size&#125;, &#123;HASH&#125;, &#123;date&#125;&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;m&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&#123;content&#125;&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+<p>其中，<code>c</code> 参数格式为
+<code>出现时间,颜色,模式,大小,HASH,发送时间</code></p>
+<h3 id="转换格式">转换格式</h3>
+<p>忽略不必要的部分，可以利用命令行工具 <code>jq</code> 将 dandanplay
+格式的弹幕转换为 AcFun 格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -sL -X GET <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> <span class="hljs-string">&#x27;https://api.dandanplay.net/api/v2/comment/179140001/?withRelated=true&#x27;</span> | jq <span class="hljs-string">&#x27;.comments | map(&#123;c: (.p | split(&quot;,&quot;) | [.[0], .[2], .[1], &quot;18&quot;, .[3], &quot;0&quot;] | join(&quot;,&quot;)), m: .m&#125;)&#x27;</span> &gt; danmuku.json<br></code></pre></td></tr></table></figure>
+<p>通过上述命令，我们得到包括 AcFun 弹幕格式的弹幕文件
+<code>danmuku.json</code>。</p>
+<h2 id="将-acfun-弹幕格式转换为播放器适用的-ass-字幕格式">将 AcFun
+弹幕格式转换为播放器适用的 ASS 字幕格式</h2>
+<p>利用在线工具 <a
+target="_blank" rel="noopener" href="https://tiansh.github.io/us-danmaku/acfun/">AcFun ASS
+弹幕在线转换</a> 可以将 AcFun 弹幕格式转换为播放器适用的 ASS
+字幕格式。</p>
+<h2 id="使用-mpv-播放器观看弹幕">使用 MPV 播放器观看弹幕</h2>
+<p>默认选项下，MPV 播放器对双字幕的支持不佳，且弹幕帧率过低。</p>
+<p>前者需要在播放时添加选项
+<code>--secondary-sub-ass-override</code>。</p>
+<p>后者需要在MPV 播放器的配置文件 <code>~/.config/mpv/mpv.conf</code>
+添加如下参数：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">vf</span><span class="hljs-operator">=</span>lavfi<span class="hljs-operator">=</span><span class="hljs-string">&quot;fps=fps=144:round=down&quot;</span><br></code></pre></td></tr></table></figure>
+<p>其中帧数 <code>144</code> 视情况而定。</p>
+<p>自此已经能观看弹幕了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mpv --secondary-sub-ass-override --sid=1 --secondary-sid=3 --sub-file=<span class="hljs-variable">$HOME</span>/Downloads/_第1话\ 用俄语说真心话的艾莉同学_.ass \[Nekomoe\ kissaten\&amp;LoliHouse\]\ Tokidoki\ Bosotto\ Russia-go\ de\ Dereru\ Tonari\ no\ Alya-san\ -\ 01\ \[WebRip\ 1080p\ HEVC-10bit\ AAC\ ASSx2\].mkv<br></code></pre></td></tr></table></figure>
+<p><img
+src="https://cdn.jsdelivr.net/gh/lihaoze123/pic/2024-07-27-185741_screenshot.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="使用脚本简化操作">使用脚本简化操作</h2>
+<p>对于上述操作，有 <code>fish</code> 脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs fish">function select_option<br>    set options $argv<br>    set selected &quot;&quot;<br>    set index &quot;&quot;<br><br>    while test -z &quot;$selected&quot;<br>        for i in (seq (count $options))<br>            echo &quot;$i) $options[$i]&quot; &gt; /dev/tty<br>        end<br><br>        read -l -P &quot;请选择一个选项 (1-&quot;(count $options)&quot;): &quot; choice<br><br>        if test &quot;$choice&quot; -ge 1 -a &quot;$choice&quot; -le (count $options) 2&gt;/dev/null<br>            set selected $options[$choice]<br>            set index $choice<br>        else<br>            echo &quot;无效选择,请重试&quot;<br>        end<br>    end<br><br>    echo $selected<br>    echo $index<br>end<br><br>function danmku<br>    set anime $argv[1]<br><br>    set animeRes (curl -s -X GET --header &#x27;Accept: application/json&#x27; --data-urlencode &quot;anime=&#x27;$anime&#x27;&quot; &#x27;https://api.dandanplay.net/api/v2/search/episodes&#x27;)<br>    set episodes (echo $animeRes | jq &#x27;.animes.[].episodes&#x27;)<br><br>    set titles (echo $episodes | jq &#x27;map(.episodeTitle) | .[]&#x27;)<br>    set selected (select_option $titles)    <br>    set episodeTitle $selected[1]<br>    set index $selected[2]<br><br>    set episodeId (echo $episodes | jq &#x27;.[&#x27;$index&#x27;-1].episodeId&#x27;)<br><br>    curl -sL -X GET &#x27;Accept: application/json&#x27; &#x27;https://api.dandanplay.net/api/v2/comment/&#x27;$episodeId&#x27;/?withRelated=true&#x27; | jq &#x27;.comments | map(&#123;c: (.p | split(&quot;,&quot;) | [.[0], .[2], .[1], &quot;18&quot;, .[3], &quot;0&quot;] | join(&quot;,&quot;)), m: .m&#125;)&#x27; &gt; $episodeTitle.json<br><br>    echo $episodeId<br><br>    echo &quot;已下载并转换为 json 格式弹幕 (Acfun) 的剧集 $anime.json ($episodeTitle)&quot;<br>end<br></code></pre></td></tr></table></figure>
+<p>通过该脚本可以较为方便地下载 AcFun 弹幕格式的 <code>json</code>
+弹幕文件。</p>
+<h2 id="使用-kikoplay-播放器观看弹幕">使用 KikoPlay 播放器观看弹幕</h2>
+<p>KikoPlay 是基于 <code>libmpv</code> 播放内核的弹幕播放器，具有
+<code>WebDav</code>、<code>资料库</code>、<code>aria2 下载</code>
+等功能，提供了较为完善的追番体验<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="https://github.com/KikoPlayProject/KikoPlay">[2]</span></a></sup>。</p>
+<p>但是在目前阶段还存在一些需要改进的地方：</p>
+<ul>
+<li><p>在 Wayland 显示协议下直接运行会造成主窗口和播放窗口分离</p>
+<p>解决方法是是切换为X11显示协议，或者使用xwayland兼容层来运行。
+要强制在Wayland会话中使用X11(需要安装xwayland)，则需要添加“QT_QPA_PLATFORM=xcb”参数。<br />
+同时关闭 <code>进度条预览</code> 选项。</p></li>
+<li><p>巴哈姆特动画疯的弹幕无法添加</p>
+<p>尚不确定是笔者网络代理的问题，还是播放器自身弹幕下载脚本的问题。由于目前大部分的新番叔叔都没有买，动画疯弹幕的缺失会大大影响弹幕观看体验。</p>
+<p>笔者的解决方案是用脚本把 AcFun 的 json 格式的弹幕转换成 bilibili 的
+xml 格式的弹幕，再用 KikoPlay
+加载本地弹幕<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="KikoPlay 仅支持导入 BiliBili 的 xml 格式弹幕">[3]</span></a></sup>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/python3</span><br><br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> xml.etree.ElementTree <span class="hljs-keyword">as</span> ET<br><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_acfun_to_bilibili</span>(<span class="hljs-params">acfun_json</span>):<br>    root = ET.Element(<span class="hljs-string">&#x27;i&#x27;</span>)<br><br>    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> acfun_json:<br>        d = ET.SubElement(root, <span class="hljs-string">&#x27;d&#x27;</span>)<br>        <br>        c_parts = item[<span class="hljs-string">&#x27;c&#x27;</span>].split(<span class="hljs-string">&#x27;,&#x27;</span>)<br>        <br>        time = c_parts[<span class="hljs-number">0</span>]<br>        color = c_parts[<span class="hljs-number">1</span>]<br>        size = c_parts[<span class="hljs-number">2</span>]<br>        uid = c_parts[<span class="hljs-number">4</span>] <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(c_parts) &gt; <span class="hljs-number">4</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;0&#x27;</span><br>        <br>        p = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;time&#125;</span>,1,<span class="hljs-subst">&#123;size&#125;</span>,<span class="hljs-subst">&#123;color&#125;</span>,0,0,<span class="hljs-subst">&#123;uid&#125;</span>,0&quot;</span><br>        d.<span class="hljs-built_in">set</span>(<span class="hljs-string">&#x27;p&#x27;</span>, p)<br>        <br>        d.text = item[<span class="hljs-string">&#x27;m&#x27;</span>]<br><br>    <span class="hljs-keyword">return</span> ET.tostring(root, encoding=<span class="hljs-string">&#x27;unicode&#x27;</span>, method=<span class="hljs-string">&#x27;xml&#x27;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(sys.argv) &gt; <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(sys.argv[<span class="hljs-number">1</span>], <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                acfun_json = json.load(f)<br>        <span class="hljs-keyword">except</span> FileNotFoundError:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;文件 &#x27;<span class="hljs-subst">&#123;sys.argv[<span class="hljs-number">1</span>]&#125;</span>&#x27; 不存在。请输入JSON数据:&quot;</span>)<br>            acfun_json = json.loads(<span class="hljs-built_in">input</span>())<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;请输入AcFun JSON弹幕数据:&quot;</span>)<br>        acfun_json = json.loads(<span class="hljs-built_in">input</span>())<br><br>    bilibili_xml = convert_acfun_to_bilibili(acfun_json)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;转换后的Bilibili XML弹幕:&quot;</span>)<br><br>    filename = sys.argv[<span class="hljs-number">1</span>].split(<span class="hljs-string">&#x27;.&#x27;</span>)[<span class="hljs-number">0</span>]<br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filename + <span class="hljs-string">&#x27;.xml&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(bilibili_xml)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;已保存到 &#123;&#125;.xml&quot;</span>.<span class="hljs-built_in">format</span>(filename))<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="update">2024.7.31 update</h2>
+<p>使用接口 <code>/api/v2/match</code>
+可以更精确地匹配节目信息，结合下列脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs fish">function danmaku<br>    set filePath $argv[1]<br>    set hash (dd if=$filePath bs=1M count=16 2&gt;/dev/null | md5sum | cut -d &#x27; &#x27; -f 1)<br>    <br>    set fileName (basename $filePath | cut -d &#x27;.&#x27; -f 1)<br><br>    set episodeRes (curl -s -X POST -H &quot;Content-Type: application/json&quot; -d &quot;&#123;\&quot;fileName\&quot;:\&quot;$fileName\&quot;,\&quot;fileHash\&quot;:\&quot;$hash\&quot;&#125;&quot; &quot;https://api.dandanplay.net/api/v2/match&quot;)<br><br>    echo $episodeRes<br><br>    set episodeId (echo $episodeRes | jq &#x27;.matches[0].episodeId&#x27;)<br>    echo $episodeId<br><br>    curl -sL -X GET &#x27;Accept: application/json&#x27; &#x27;https://api.dandanplay.net/api/v2/comment/&#x27;$episodeId&#x27;/?withRelated=true&#x27; | jq &#x27;.comments | map(&#123;c: (.p | split(&quot;,&quot;) | [.[0], .[2], .[1], &quot;18&quot;, .[3], &quot;0&quot;] | join(&quot;,&quot;)), m: .m&#125;)&#x27; &gt; $fileName.json<br><br>    echo &quot;已下载并转换为 json 格式弹幕 (Acfun) 的剧集 $fileName&quot;<br><br>    AcFunDanmuku2Bili.py $fileName.json<br>    echo &quot;已转换为 xml 格式弹幕 (BiliBili) 的剧集 $fileName&quot;<br><br>    rm $fileName.json<br>end<br></code></pre></td></tr></table></figure>
+<p>同时利用 <strong>KikoPlay</strong> 播放器的
+<code>自动加载本地同名弹幕文件</code> 功能可以方便地观看</p>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>见
+https://chumeng.xyz/%E5%9C%A8-Arch-%E4%B8%8A%E4%BD%BF%E7%94%A8-Wine-%E6%9D%A5%E8%BF%90%E8%A1%8C-Lyricify-4-%E6%98%BE%E7%A4%BA%E6%AD%8C%E8%AF%8D/
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2"
+class="footnote-text"><span>https://github.com/KikoPlayProject/KikoPlay
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:3" class="footnote-text"><span>KikoPlay 仅支持导入 BiliBili
+的 xml 格式弹幕
+<a href="#fnref:3" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/%E5%8A%A8%E6%BC%AB/" class="print-no-link">#动漫</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>如何愉快地在 Linux 下观看带弹幕的番剧</div>
+      <div>https://chumeng.xyz/如何愉快地在-Linux-下观看带弹幕的番剧/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>chumeng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/MIT18-01-Lec6-%E6%8C%87%E6%95%B0%E4%B8%8E%E5%AF%B9%E6%95%B0-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MIT18.01 Lec6 指数与对数 学习笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MIT18.01 Lec6 指数与对数 学习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/armv7l-%E6%9E%B6%E6%9E%84%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E8%B8%A9%E5%9D%91%E5%8F%8A%E7%BE%A4%E6%99%96-218j-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/" title="armv7l 架构交叉编译踩坑及群晖 218j 环境配置记录">
+                        <span class="hidden-mobile">armv7l 架构交叉编译踩坑及群晖 218j 环境配置记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

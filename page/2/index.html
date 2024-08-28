@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/mai.jpg">
+  <link rel="icon" href="/img/mai.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="chumeng">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Chumeng&#39;s blog">
+<meta property="og:url" content="https://chumeng.xyz/page/2/index.html">
+<meta property="og:site_name" content="Chumeng&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="chumeng">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Chumeng&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chumeng.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>初梦</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="黄色的树林里分出两条路，我选择了人际更少的一条，从此决定了我一生的道路。"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/MIT18-06-Lec1-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E5%87%A0%E4%BD%95%E8%A1%A8%E7%A4%BA-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+          MIT18.06 Lec1 线性代数的几何表示 学习笔记
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/MIT18-06-Lec1-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E5%87%A0%E4%BD%95%E8%A1%A8%E7%A4%BA-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+        <div>
+          讲座从一个解方程的例子开始： \[ \begin{cases} \begin{aligned} 2 x &amp;- y &amp;= 0 \\ - x &amp;+ 2 y &amp;= 3 \end{aligned} \end{cases} \] 本节课讲了看待这个方程组的三种方式。 Row Picture 将每行的方程看作一条直线，两条直线的交点就对应了方程组的解，在 图一 中可以看出方程组
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-07 19:57" pubdate>
+              2024-08-07
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">#线性代数</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/MIT18-01-Lec27-28-%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%AF%E5%88%86%E4%B8%8E%E4%B8%89%E8%A7%92%E6%9B%BF%E6%8D%A2-%E5%8F%8D%E5%90%91%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+          MIT18.01 Lec27&amp;28 三角函数的积分与三角换元 &amp; 反向变量替换 学习笔记
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/MIT18-01-Lec27-28-%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%AF%E5%88%86%E4%B8%8E%E4%B8%89%E8%A7%92%E6%9B%BF%E6%8D%A2-%E5%8F%8D%E5%90%91%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+        <div>
+          这两节开始有点技术含量了
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-08-05 17:17" pubdate>
+              2024-08-05
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/">#微积分</a>
+            
+              <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/">#高等数学</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/MIT18-01-Lec6-%E6%8C%87%E6%95%B0%E4%B8%8E%E5%AF%B9%E6%95%B0-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+          MIT18.01 Lec6 指数与对数 学习笔记
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/MIT18-01-Lec6-%E6%8C%87%E6%95%B0%E4%B8%8E%E5%AF%B9%E6%95%B0-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+        <div>
+          最近玩的有点过头了，想趁这个暑假把微积分预习一下，省略前面高中学习过的较简单部分，从 Lecture 6 开始记录笔记，以增强印象。  指数函数求导 这节课的主要任务是求指数函数的导数，即求 \(\frac{d}{d x} a^x\)，以下是推导过程。 \(M(a)\) 的推导 根据导数的定义，有 \[ \frac{d}{d x} a^x=\lim _{\Delta x \rightarrow 0
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-31 20:32" pubdate>
+              2024-07-31
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/">#微积分</a>
+            
+              <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/">#高等数学</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E5%A6%82%E4%BD%95%E6%84%89%E5%BF%AB%E5%9C%B0%E5%9C%A8-Linux-%E4%B8%8B%E8%A7%82%E7%9C%8B%E5%B8%A6%E5%BC%B9%E5%B9%95%E7%9A%84%E7%95%AA%E5%89%A7/" target="_self">
+          如何愉快地在 Linux 下观看带弹幕的番剧
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E5%A6%82%E4%BD%95%E6%84%89%E5%BF%AB%E5%9C%B0%E5%9C%A8-Linux-%E4%B8%8B%E8%A7%82%E7%9C%8B%E5%B8%A6%E5%BC%B9%E5%B9%95%E7%9A%84%E7%95%AA%E5%89%A7/" target="_self">
+        <div>
+          自从之前把主系统换到 Arch Linux 之后，Windows 下的一些常规操作都不能，即使是基本的听歌/追番的体验也很差[1]。 在尝试了半天用 Wine 安装 dandanplay（依赖问题不会解决），使用开源方案 KikoPlay （目前 AUR 上面的版本在 Wayland 显示协议下有谜之窗口分离问题，且目前版本无法添加巴哈姆特的弹幕）之后，我选择了使用脚本从 弹弹play API
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-27 17:08" pubdate>
+              2024-07-27
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+              <a href="/tags/%E5%8A%A8%E6%BC%AB/">#动漫</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/armv7l-%E6%9E%B6%E6%9E%84%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E8%B8%A9%E5%9D%91%E5%8F%8A%E7%BE%A4%E6%99%96-218j-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/" target="_self">
+          armv7l 架构交叉编译踩坑及群晖 218j 环境配置记录
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/armv7l-%E6%9E%B6%E6%9E%84%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E8%B8%A9%E5%9D%91%E5%8F%8A%E7%BE%A4%E6%99%96-218j-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/" target="_self">
+        <div>
+          image-20240222020421900  记录配置群晖 218j (armv7l 架构) 常用环境，仅作为记录。关于交叉编译网络上的资料比较少，很多地方踩了很多坑，有一些心得，同时群晖自带的套件中心套件很少，本人的型号没有什么第三方库，想要装一个 aria2 网络上能查到的资料都很少，且 DSM7.0 之后本来能用的方法也失效了，即使装了 Entware ，很多包版本也是落后的，只能自
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-25 20:49" pubdate>
+              2024-07-25
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+              <a href="/tags/NAS/">#NAS</a>
+            
+              <a href="/tags/%E7%BC%96%E8%AF%91/">#编译</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E5%9C%A8-Arch-%E4%B8%8A%E4%BD%BF%E7%94%A8-Wine-%E6%9D%A5%E8%BF%90%E8%A1%8C-Lyricify-4-%E6%98%BE%E7%A4%BA%E6%AD%8C%E8%AF%8D/" target="_self">
+          在 Arch 上使用 Wine 来运行 Lyricify 4 显示歌词
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E5%9C%A8-Arch-%E4%B8%8A%E4%BD%BF%E7%94%A8-Wine-%E6%9D%A5%E8%BF%90%E8%A1%8C-Lyricify-4-%E6%98%BE%E7%A4%BA%E6%AD%8C%E8%AF%8D/" target="_self">
+        <div>
+          Lyricify 4 是一款为 Spotify 提供滚动歌词和更多功能的软件。 作为一个歌词软件，Lyricify 4 简洁美观，但在可预见的未来，作者似乎没有计划提供 Linux 版本[1]。 遗憾的是目前来说似乎并没有其他可替代的方案来在 Linux 系统上面显示 Spotify 歌词，于是在 Linux 系统中唯一的方法就是使用 Wine 来运行 Windows 端的 Lyricify 程序
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-20 01:58" pubdate>
+              2024-07-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+              <a href="/tags/Wine/">#Wine</a>
+            
+              <a href="/tags/Arch/">#Arch</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/%E4%B8%80%E4%BA%9B%E7%94%A8%E8%AF%AD%E7%9A%84%E7%BA%A6%E5%AE%9A/" target="_self">
+          一些用语的约定
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/%E4%B8%80%E4%BA%9B%E7%94%A8%E8%AF%AD%E7%9A%84%E7%BA%A6%E5%AE%9A/" target="_self">
+        <div>
+          伪代码 约定 我们在伪代码中采用以下约定（参考《算法导论》，使用 \(\LaTeX\) 书写）  缩进表示块结构。 \(\textbf{while}\), \(\textbf{for}\), \(\textbf{repeat-until}\) 等循环结构以及 \(\textbf{if-else}\) 等条件结构与 C，C++，Java，Python，和 Pascal 中的那些结构具有类似的解释。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-30 01:36" pubdate>
+              2024-06-30
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/Chumeng-s-code-style-for-OI-ACM/" target="_self">
+          Chumeng&#39;s code style for OI/ACM
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/Chumeng-s-code-style-for-OI-ACM/" target="_self">
+        <div>
+          下面是 Chumeng 的算法竞赛代码规范（即通常情况下，在代码中采用以下约定）。其来源主要来自于 Chumeng 的长期实践，jiangly 的提交记录，Menci 的代码规范，_rqy 的代码规范， Studying Father 的代码规范。 概览 不推荐使用命名空间。 不推荐使用诸如 LL 或 ULL 的缩写来作为类型别名，而应使用 i64 或 u64。 main 函数应该置于整段程序的末
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-30 00:05" pubdate>
+              2024-06-30
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/Haskell-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" target="_self">
+          Haskell 学习记录
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/Haskell-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" target="_self">
+        <div>
+          Think Functional! -- fhq  最近对函数式编程比较感兴趣，记录一下用 Haskell 解决的算法/数学问题。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-08 23:20" pubdate>
+              2023-04-08
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/Picnic-Planning-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" target="_self">
+          Picnic Planning 解题报告
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/Picnic-Planning-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" target="_self">
+        <div>
+          题目 题目描述 The Contortion Brothers are a famous set of circus clowns, known worldwide for their incredible ability to cram an unlimited number of themselves into even the smallest vehicle. During the off
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-11-02 23:33" pubdate>
+              2022-11-02
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

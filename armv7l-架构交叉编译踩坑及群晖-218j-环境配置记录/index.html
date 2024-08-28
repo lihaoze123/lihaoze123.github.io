@@ -1,0 +1,869 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/mai.jpg">
+  <link rel="icon" href="/img/mai.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="chumeng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="image-20240222020421900  记录配置群晖 218j (armv7l 架构) 常用环境，仅作为记录。关于交叉编译网络上的资料比较少，很多地方踩了很多坑，有一些心得，同时群晖自带的套件中心套件很少，本人的型号没有什么第三方库，想要装一个 aria2 网络上能查到的资料都很少，且 DSM7.0 之后本来能用的方法也失效了，即使装了 Entware ，很多包版本也是落后的，只能自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="armv7l 架构交叉编译踩坑及群晖 218j 环境配置记录">
+<meta property="og:url" content="https://chumeng.xyz/armv7l-%E6%9E%B6%E6%9E%84%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E8%B8%A9%E5%9D%91%E5%8F%8A%E7%BE%A4%E6%99%96-218j-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Chumeng&#39;s blog">
+<meta property="og:description" content="image-20240222020421900  记录配置群晖 218j (armv7l 架构) 常用环境，仅作为记录。关于交叉编译网络上的资料比较少，很多地方踩了很多坑，有一些心得，同时群晖自带的套件中心套件很少，本人的型号没有什么第三方库，想要装一个 aria2 网络上能查到的资料都很少，且 DSM7.0 之后本来能用的方法也失效了，即使装了 Entware ，很多包版本也是落后的，只能自">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lihaoze123/pic/image-20240220212953861.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lihaoze123/pic/image-20240220212851797.png">
+<meta property="article:published_time" content="2024-07-25T12:49:25.000Z">
+<meta property="article:modified_time" content="2024-08-28T12:04:28.501Z">
+<meta property="article:author" content="chumeng">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="NAS">
+<meta property="article:tag" content="编译">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lihaoze123/pic/image-20240220212953861.png">
+  
+  
+  
+  <title>armv7l 架构交叉编译踩坑及群晖 218j 环境配置记录 - Chumeng&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chumeng.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>初梦</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="armv7l 架构交叉编译踩坑及群晖 218j 环境配置记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-25 20:49" pubdate>
+          2024年7月25日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">armv7l 架构交叉编译踩坑及群晖 218j 环境配置记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <figure>
+<img
+src="https://cdn.jsdelivr.net/gh/lihaoze123/pic/image-20240222020421900.png" srcset="/img/loading.gif" lazyload
+alt="image-20240222020421900" />
+<figcaption aria-hidden="true">image-20240222020421900</figcaption>
+</figure>
+<p>记录配置群晖 218j (armv7l 架构)
+常用环境，仅作为记录。关于交叉编译网络上的资料比较少，很多地方踩了很多坑，有一些心得，同时群晖自带的套件中心套件很少，本人的型号没有什么第三方库，想要装一个
+<code>aria2</code> 网络上能查到的资料都很少，且 <code>DSM7.0</code>
+之后本来能用的方法也失效了，即使装了 <code>Entware</code>
+，很多包版本也是落后的，只能自己编译，所以本文可能有参考价值。但
+<strong>这不是一篇参考指南</strong>，编译等操作本就门槛不低，而且相比常规的编译，<code>armv7l</code>
+架构不管是本地编译还是交叉编译都非常抽象，比较基本的操作我也都省略了，也懒得截图。很多地方不一定是标准操作，仅供参考。</p>
+<p><strong>本人交叉编译时踩的坑</strong></p>
+<ul>
+<li><p>有调试编译了一整天，最后发 issue
+才知道不支持交叉编译的（不写在文档里，issue
+里也没有相关的说话）。</p></li>
+<li><p>也有搞了半天依赖都编译不出来的，结果人家开发者最近已经不用这个依赖，发过
+pull request 了的。</p></li>
+<li><p>群晖自带的内核版本太低,
+有的即使调试一整天，系统调用也可能会报错。</p></li>
+</ul>
+<p>总之交叉编译，特别是给 <code>armv7l</code>
+编译是一件很麻烦的事，网上几乎查不到资料，下文给出的配置文件 (针对
+armv7l)
+对于大部分软件应该是适用的，但是具体到每个软件里还得看情况，即使都用的是
+<code>make</code>，<code>configure</code>，<code>cmake</code>，但是具体到参数里也不一定通用，如果条件允许尽量本地编译。</p>
+<p>对于莫名其妙的问题，善用 <code>StackOverFlow</code> 和
+<code>Google</code>
+或许会有帮助，或者可能是项目本身的问题，尽量下载最近的 release
+进行编译，很多时候直接编译 <code>git master</code> 不一定是好选择 。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lihaoze123/pic/image-20240220212953861.png" srcset="/img/loading.gif" lazyload alt="image-20240220212953861" style="zoom:50%;" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lihaoze123/pic/image-20240220212851797.png" srcset="/img/loading.gif" lazyload alt="image-20240220212851797" style="zoom:50%;" /></p>
+<h2 id="关于-root-账号的配置">关于 root 账号的配置</h2>
+<ol type="1">
+<li><p><code>sudo -i</code> 切换到 <code>root</code> 账号</p></li>
+<li><p>更改 <code>root</code> 密码</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">synouser --setpw root password</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>更改 <code>ssh</code> 账号登录限制，修改
+<code>/etc/ssh/sshd_config</code>
+(<code>synosystemctl restart sshd</code> 重启)</p>
+<p><code>PermitRootLogin</code> 项改为 <code>yes</code></p>
+<p><code>PubkeyAuthentication</code> 项取消注释</p></li>
+<li><p>本机修改 <code>~/.ssh/config</code></p>
+<p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">Host MyNAS<br>    HostName <span class="hljs-number">192.168</span>.<span class="hljs-number">50.125</span><br>    Port <span class="hljs-number">22</span><br>    <span class="hljs-keyword">User</span> <span class="hljs-title">root</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>上传公钥</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-copy-id -i ~/.ssh/id_ed25519.pub MyNAS</span><br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h2 id="交叉编译环境配置">交叉编译环境配置</h2>
+<ol type="1">
+<li><p>下载 <a
+target="_blank" rel="noopener" href="https://help.synology.com/developer-guide/compile_applications/download_dsm_tool_chain.html">DSM
+Tool Chain</a></p></li>
+<li><p>下载 <a
+target="_blank" rel="noopener" href="https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/">arm-linux-gnueabihf
+tool chain</a></p></li>
+<li><p><code>CMake toolchain</code> 配置实例
+(<code>arm-unknown-linux-gnueabi.toolchain.cmake</code>)</p>
+<p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">set</span>(CMAKE_SYSTEM_NAME Linux)<br><span class="hljs-keyword">set</span>(CMAKE_SYSTEM_PROCESSOR arm)<br><br><span class="hljs-keyword">set</span>(CMAKE_C_COMPILER <span class="hljs-string">&quot;arm-unknown-linux-gnueabi-gcc&quot;</span>)<br><span class="hljs-keyword">set</span>(CMAKE_CXX_COMPILER <span class="hljs-string">&quot;arm-unknown-linux-gnueabi-g++&quot;</span>)<br><br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH <span class="hljs-string">&quot;/home/chumeng/cross_compile/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi/lib&quot;</span>)<br><br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)<br><br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)<br><span class="hljs-keyword">set</span>(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)<br></code></pre></td></tr></table></figure> 编译命令</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">cmake -DCMAKE_TOOLCHAIN_FILE=~/cross_compile/arm-unknown-linux-gnueabi.toolchain.cmake -DCMAKE_INSTALL_PREFIX=/home/chumeng/cross_compile/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi ..</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p><code>Rust</code> 交叉编译环境</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">rustup target add armv7-unknown-linux-gnueabihf</span><br></code></pre></td></tr></table></figure></p>
+<p>配置文件实例 (<code>.cargo/config.toml</code>)</p>
+<p><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs toml"><span class="hljs-section">[build]</span><br><span class="hljs-attr">target</span> = <span class="hljs-string">&quot;armv7-unknown-linux-gnueabihf&quot;</span><br><br><br><span class="hljs-section">[target.armv7-unknown-linux-gnueabihf]</span><br><span class="hljs-attr">linker</span> = <span class="hljs-string">&quot;arm-unknown-linux-gnueabi-gcc&quot;</span><br></code></pre></td></tr></table></figure></p>
+<p>编译命令</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">cargo build --release --target=armv7-unknown-linux-gnueabihf</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p><code>Go</code> 交叉编译</p>
+<p>编译命令</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">CC=arm-unknown-linux-gnueabi-gcc CXX=arm-unknown-linux-gnueabi-g++ AR=arm-unknown-linux-gnueabi-ar  GOARM=7 GOOS=linux GOARCH=arm go build<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h2 id="一些必要的工作">一些必要的工作</h2>
+<p><strong>!! 轻易不要乱动 <code>/usr</code> 目录 !!</strong></p>
+<p>本人因为乱改 <code>/usr</code> 重装了很多次系统，有一次提前准备了
+<code>busybox</code>，但是是动态链接的，环境都配的差不多了，只能前功尽弃，所以提前备好一些常用工具非常重要。</p>
+<h3 id="交叉编译静态-rsync">交叉编译静态 rsync</h3>
+<ol type="1">
+<li><p>编译 <a target="_blank" rel="noopener" href="https://github.com/Cyan4973/xxHash">xxhash</a>，<a
+target="_blank" rel="noopener" href="https://github.com/lz4/lz4">lz4</a></p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CC=arm-linux-gnueabihf-gcc make -j32</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">prefix=~/cross_compile/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi make install</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>编译 <a target="_blank" rel="noopener" href="https://github.com/facebook/zstd/">zstd</a></p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> build/cmake</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make build &amp;&amp; <span class="hljs-built_in">cd</span> build</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">cmake -DCMAKE_TOOLCHAIN_FILE=~/cross_compile/arm-unknown-linux-gnueabi.toolchain.cmake -DCMAKE_INSTALL_PREFIX=/home/chumeng/cross_compile/arm-unknown-linux-gnueabi/arm-unknown-linux-gnueabi ..</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make -j32</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make install</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>编译 <a target="_blank" rel="noopener" href="https://github.com/WayneD/rsync">rsync</a></p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./configure CFLAGS=<span class="hljs-string">&quot;-static&quot;</span>  --host=arm-unknown-linux-gnueabi --prefix=/home/chumeng/rsync-static --disable-md2man --disable-openssl</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make -j32</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">arm-unknown-linux-gnueabi-strip rsync</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make install</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mv</span> ~/rsync-static/bin/rsync ~/rsync-static/bin/rsync-static</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp -r -O ~/rsync-static MyNAS:/root/</span><br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="交叉编译静态-busybox">交叉编译静态 BusyBox</h3>
+<ol type="1">
+<li><p>配置编译选项(<code>.config</code>)</p>
+<p><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs diff"># config.patch<br><br>44c44<br>&lt; # CONFIG_STATIC is not set<br><span class="hljs-comment">---</span><br>&gt; CONFIG_STATIC=y<br>51c51<br>&lt; CONFIG_CROSS_COMPILER_PREFIX=&quot;&quot;<br><span class="hljs-comment">---</span><br>&gt; CONFIG_CROSS_COMPILER_PREFIX=&quot;arm-unknown-linux-gnueabi-&quot;<br></code></pre></td></tr></table></figure></p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://git.busybox.net/busybox</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> busybox</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make defconfig</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">patch .config config.patch</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>编译</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">make -j32</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp -r -O _install MyNAS:/root/busybox</span><br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h2 id="fish-shell-配置">Fish shell 配置</h2>
+<ol type="1">
+<li><p><del>编译 <code>ncurses</code></del>
+(链接非常痛苦，开发组计划去除
+ncurses，这是我浪费一上午编译不出来忍无可忍发 issue 得到的答复，拉取 <a
+target="_blank" rel="noopener" href="https://github.com/fish-shell/fish-shell/pull/10269">Remove
+(n)curses dependency by faho · Pull Request #10269</a> 可解)</p></li>
+<li><p>编译</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> build</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">cmake -DRust_CARGO_TARGET=armv7-unknown-linux-gnueabihf ..</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make &amp;&amp; arm-unknown-linux-gnueabi-strip fish</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">cmake --install . --prefix ~/fish</span><br></code></pre></td></tr></table></figure></p>
+<ol type="1">
+<li>安装</li>
+</ol>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> ~/fish</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp -r -O etc bin MyNAS:/</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp -r -O share MyNAS:/usr/local/</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">Target</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mv</span> /bin/ash /bin/ash.bak</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">ln</span> -s /bin/fish /bin/ash</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>添加 <code>PATH</code> 路径</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> -p /volume1/software/bin</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> -p /volume1/software/.cargo/bin</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">fish_add_path /volume1/software/bin /volume1/software/.cargo/bin /opt/bin /usr/local/bin</span><br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h2 id="环境配置">环境配置</h2>
+<h3 id="改-lib-脚本">改 lib 脚本</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs fish"># ~/.config/fish/functions/change-lib.fish<br><br>set prefix /opt<br><br>function change-lib<br>    if not test &quot;$no_change_lib&quot; = &quot;true&quot;<br>        patchelf --set-rpath $prefix/usr/lib $argv<br>    end<br>end<br><br>function change-interpreter<br>    if not test &quot;$no_change_interpreter&quot; = &quot;true&quot;<br>        patchelf --set-interpreter $prefix/usr/lib/ld-linux-armhf.so.3 $argv<br>    end<br>end<br><br>function change<br>	change-lib $argv<br>	change-interpreter $argv<br>end<br></code></pre></td></tr></table></figure>
+<h3 id="安装-patchelf-以修改-elf">安装 patchelf 以修改 ELF</h3>
+<p>系统自带的库文件版本太老，很多程序不能正常运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> --depth=1 https://github.com/NixOS/patchelf.git</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> patchelf</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">./bootstrap.sh</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">./configure CXXFLAGS=<span class="hljs-string">&quot;-static&quot;</span> --host=arm-unknown-linux-gnueabi --prefix=/home/chumeng/patchelf</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make -j32</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">make install-strip</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">yay patchelf</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp -r -O /home/chumeng/patchelf/* MyNAS:/</span><br></code></pre></td></tr></table></figure>
+<h3 id="安装-entware">安装 Entware</h3>
+<p>参考 <a
+target="_blank" rel="noopener" href="https://github.com/Entware/Entware/wiki/Install-on-Synology-NAS">Install
+on Synology NAS</a></p>
+<h3 id="命令行相关">命令行相关</h3>
+<h4 id="常用软件">常用软件</h4>
+<ul>
+<li><strong>neovim</strong> 编辑器 <code>opkg install neovim</code></li>
+<li><strong>git</strong> 版本管理工具
+<code>opkg install git git-http</code></li>
+<li><strong>tmux</strong> 终端复用器 <code>opkg install tmux</code></li>
+<li><strong>nodejs</strong> JavaScript 运行环境
+<code>opkg install node node-npm</code></li>
+<li><strong>python</strong> 常用语言 参考 <a
+target="_blank" rel="noopener" href="https://github.com/Entware/Entware/wiki/Self-installation-of-python-modules">Entware
+页面</a></li>
+<li><strong>ranger</strong> 管理文件
+<code>HOME=/volume1/software/python pip install ranger-fm</code></li>
+<li><strong><a
+target="_blank" rel="noopener" href="https://github.com/TheLocehiliosan/yadm">yadm</a></strong> 管理
+dotfiles 参考 <a target="_blank" rel="noopener" href="https://yadm.io/docs/install#openwrt">yadm
+文档页面</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/sharkdp/bat"><strong>bat</strong></a>
+替代 cat <strong>使用 cargo 交叉编译</strong></li>
+<li><strong><a
+target="_blank" rel="noopener" href="https://github.com/jesseduffield/lazygit">lazygit</a></strong> git
+GUI <strong>使用 go 交叉编译</strong></li>
+<li><strong><a
+target="_blank" rel="noopener" href="https://github.com/hykilpikonna/hyfetch">hyfetch</a></strong>
+命令行系统信息工具 <strong>pip 安装</strong></li>
+</ul>
+<h4 id="配置-dotfile">配置 dotfile</h4>
+<p>这是我的 <strong><a
+target="_blank" rel="noopener" href="https://github.com/lihaoze123/dotfiles">dotfiles</a></strong>
+仓库，可以参考一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">yadm <span class="hljs-built_in">clone</span> https://github.com/lihaoze123/dotfiles</span><br></code></pre></td></tr></table></figure>
+<h3 id="nas-相关">NAS 相关</h3>
+<h4 id="ddns-go">ddns-go</h4>
+<p>个别 DNS 服务商无法访问，需要配置 proxy，这个没什么说的</p>
+<ol type="1">
+<li><p>使用 go 交叉编译</p></li>
+<li><p>安装服务</p></li>
+</ol>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ddns-go -s install</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">systemctl <span class="hljs-built_in">enable</span> ddns-go.service</span><br></code></pre></td></tr></table></figure></p>
+<ol start="3" type="1">
+<li>修改 <code>EnvironmentFile</code> (<code>ddns-go</code> 读取不了
+<code>fish</code> 设置的环境变量，需要配置
+<code>EnvironmentFile</code>)</li>
+</ol>
+<p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># /etc/sysconfig/ddns-go</span><br><br><span class="hljs-attr">HTTP_PROXY</span>=http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">7890</span><br><span class="hljs-attr">HTTPS_PROXY</span>=http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">7890</span><br></code></pre></td></tr></table></figure></p>
+<h4 id="transmission">Transmission</h4>
+<ol type="1">
+<li><strong>安装</strong> 参考 <a
+target="_blank" rel="noopener" href="https://github.com/Entware/Entware/wiki/Using-Transmission">Using
+Transmission</a></li>
+<li>修改 <code>/opt/etc/transmission/settings.json</code> 中
+<code>rpc-bind-address</code> 项为 <code>::</code> 以支持 IPv6
+(首先关闭进程)</li>
+</ol>
+<h4 id="aria2">aria2</h4>
+<ol type="1">
+<li><strong>安装</strong> 参考 <a
+target="_blank" rel="noopener" href="https://github.com/Entware/Entware/wiki/Using-Aria2">Using
+Aria2</a></li>
+<li>下载 <strong><a
+target="_blank" rel="noopener" href="https://github.com/mayswind/AriaNg">AriaNG</a></strong>，放在
+<code>/volume1</code> 的子目录中</li>
+<li>群晖自带套件 <code>WebStation</code> 中
+<code>网页服务门户 - 新增 - 虚拟主机</code> 中 <code>门户类型</code>
+选基于端口，设置端口，下一步选择网页文件放置的目录</li>
+<li>同理选基于名称，设置域名，端口以支持域名访问</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/NAS/" class="print-no-link">#NAS</a>
+      
+        <a href="/tags/%E7%BC%96%E8%AF%91/" class="print-no-link">#编译</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>armv7l 架构交叉编译踩坑及群晖 218j 环境配置记录</div>
+      <div>https://chumeng.xyz/armv7l-架构交叉编译踩坑及群晖-218j-环境配置记录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>chumeng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E5%A6%82%E4%BD%95%E6%84%89%E5%BF%AB%E5%9C%B0%E5%9C%A8-Linux-%E4%B8%8B%E8%A7%82%E7%9C%8B%E5%B8%A6%E5%BC%B9%E5%B9%95%E7%9A%84%E7%95%AA%E5%89%A7/" title="如何愉快地在 Linux 下观看带弹幕的番剧">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何愉快地在 Linux 下观看带弹幕的番剧</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E5%9C%A8-Arch-%E4%B8%8A%E4%BD%BF%E7%94%A8-Wine-%E6%9D%A5%E8%BF%90%E8%A1%8C-Lyricify-4-%E6%98%BE%E7%A4%BA%E6%AD%8C%E8%AF%8D/" title="在 Arch 上使用 Wine 来运行 Lyricify 4 显示歌词">
+                        <span class="hidden-mobile">在 Arch 上使用 Wine 来运行 Lyricify 4 显示歌词</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
