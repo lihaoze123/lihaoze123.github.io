@@ -16,15 +16,15 @@
   <meta name="author" content="chumeng">
   <meta name="keywords" content="">
   
-    <meta name="description" content="有向图的强连通分量 在解决有向图问题时，通过求解强连通分量并进行缩点，我们可以将原图转化为一个有向无环图(DAG)。这样就能利用拓扑排序的性质，将原问题转化为在 DAG 上求解的问题。 强连通分量 在有向图中，如果两个顶点间存在互相可达的路径，我们称这两个顶点是 强连通 的。当图中任意两点都强连通时，我们称这个图是一个 强连通图。而一个有向图中的极大强连通子图，则被称为 强连通分量 (Strong">
+    <meta name="description" content="图论中的连通性问题 有向图的强连通分量 在解决有向图问题时，通过求解强连通分量并进行缩点，我们可以将原图转化为一个有向无环图(DAG)。这样就能利用拓扑排序的性质，将原问题转化为在 DAG 上求解的问题。 基本概念  强连通：在有向图中，如果两个顶点之间存在互相可达的路径，则称这两个顶点是强连通的。 强连通图：如果有向图中任意两点都是强连通的，则称该图为强连通图。 强连通分量：有向图中的极大强连通">
 <meta property="og:type" content="article">
 <meta property="og:title" content="连通性问题 学习笔记">
 <meta property="og:url" content="https://chumeng.xyz/%E8%BF%9E%E9%80%9A%E6%80%A7%E9%97%AE%E9%A2%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Chumeng&#39;s blog">
-<meta property="og:description" content="有向图的强连通分量 在解决有向图问题时，通过求解强连通分量并进行缩点，我们可以将原图转化为一个有向无环图(DAG)。这样就能利用拓扑排序的性质，将原问题转化为在 DAG 上求解的问题。 强连通分量 在有向图中，如果两个顶点间存在互相可达的路径，我们称这两个顶点是 强连通 的。当图中任意两点都强连通时，我们称这个图是一个 强连通图。而一个有向图中的极大强连通子图，则被称为 强连通分量 (Strong">
+<meta property="og:description" content="图论中的连通性问题 有向图的强连通分量 在解决有向图问题时，通过求解强连通分量并进行缩点，我们可以将原图转化为一个有向无环图(DAG)。这样就能利用拓扑排序的性质，将原问题转化为在 DAG 上求解的问题。 基本概念  强连通：在有向图中，如果两个顶点之间存在互相可达的路径，则称这两个顶点是强连通的。 强连通图：如果有向图中任意两点都是强连通的，则称该图为强连通图。 强连通分量：有向图中的极大强连通">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-30T12:36:03.000Z">
-<meta property="article:modified_time" content="2024-12-31T18:09:22.248Z">
+<meta property="article:modified_time" content="2025-01-01T16:13:10.529Z">
 <meta property="article:author" content="chumeng">
 <meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary_large_image">
@@ -273,34 +273,33 @@
             
               <div class="markdown-body">
                 
-                <h2 id="有向图的强连通分量">有向图的强连通分量</h2>
+                <h1 id="图论中的连通性问题">图论中的连通性问题</h1>
+<h2 id="有向图的强连通分量">有向图的强连通分量</h2>
 <p>在解决有向图问题时，通过求解强连通分量并进行缩点，我们可以将原图转化为一个有向无环图(DAG)。这样就能利用拓扑排序的性质，将原问题转化为在
 DAG 上求解的问题。</p>
-<h3 id="强连通分量">强连通分量</h3>
-<p>在有向图中，如果两个顶点间存在互相可达的路径，我们称这两个顶点是
-<strong>强连通</strong> 的。当图中任意两点都强连通时，我们称这个图是一个
-<strong>强连通图</strong>。而一个有向图中的极大强连通子图，则被称为
-<strong>强连通分量</strong> (Strongly Connected Component, SCC)。</p>
+<h3 id="基本概念">基本概念</h3>
+<ol type="1">
+<li><strong>强连通</strong>：在有向图中，如果两个顶点之间存在互相可达的路径，则称这两个顶点是强连通的。</li>
+<li><strong>强连通图</strong>：如果有向图中任意两点都是强连通的，则称该图为强连通图。</li>
+<li><strong>强连通分量</strong>：有向图中的极大强连通子图。</li>
+</ol>
 <h3 id="dfs-生成树">DFS 生成树</h3>
-<p>在进行深度优先搜索(DFS)时，遍历过程中经过的边和顶点会形成一棵树，这就是
-DFS 生成树。在这棵树中，边可以分为四类：</p>
-<ul>
-<li>树边：DFS 遍历时实际经过的边</li>
-<li>前向边：从祖先指向后代的非树边</li>
-<li>返祖边：从后代指向祖先的边</li>
-<li>横叉边：连接不同子树中节点的边</li>
-</ul>
+<p>在深度优先搜索(DFS)过程中，遍历形成的树称为DFS生成树。其中的边可以分为四类：</p>
+<ol type="1">
+<li><strong>树边</strong>：DFS遍历时实际经过的边</li>
+<li><strong>前向边</strong>：从祖先指向后代的非树边</li>
+<li><strong>返祖边</strong>：从后代指向祖先的边</li>
+<li><strong>横叉边</strong>：连接不同子树中节点的边</li>
+</ol>
 <figure>
 <img
 src="https://picgo-chumeng.oss-cn-beijing.aliyuncs.com/四种边的示意图.svg" srcset="/img/loading.gif" lazyload
 alt="四种边的示意图" />
 <figcaption aria-hidden="true">四种边的示意图</figcaption>
 </figure>
-<p>考虑一个节点和其祖先节点是否在同一个强连通分量中，分为两种情况：</p>
-<ul>
-<li>通过一条返祖边，到达祖先节点</li>
-<li>通过一条横叉边，然后通过一条返祖边，到达祖先节点</li>
-</ul>
+<p>判断节点是否属于同一强连通分量有两种情况： 1.
+通过一条返祖边直接到达祖先节点 2.
+通过横叉边再加返祖边间接到达祖先节点</p>
 <p>简单来说，如果从一个节点出发可以到达祖先节点，那么这个节点和祖先节点就在同一个强连通分量中。</p>
 <h3 id="tarjan-算法">Tarjan 算法</h3>
 <p>Tarjan 算法需要用到两个数组：</p>
@@ -494,6 +493,12 @@ q)\)</span>。</p>
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/CF2018C-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" title="CF2018C Tree Pruning 解题报告">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CF2018C Tree Pruning 解题报告</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
