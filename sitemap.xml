@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chumeng.xyz/Luogu-P4555-%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F-%E6%9C%80%E9%95%BF%E5%8F%8C%E5%9B%9E%E6%96%87%E4%B8%B2-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/</loc>
+    
+    <lastmod>2025-03-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chumeng.xyz/CF1987D-World-is-Mine-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/</loc>
     
     <lastmod>2025-03-29</lastmod>
@@ -787,6 +796,13 @@
   
   <url>
     <loc>https://chumeng.xyz/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/</loc>
+    <lastmod>2025-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chumeng.xyz/tags/Manacher/</loc>
     <lastmod>2025-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
