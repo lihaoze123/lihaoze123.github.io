@@ -1,3 +1,4 @@
+https://chumeng.xyz/CF1987D-World-is-Mine-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/
 https://chumeng.xyz/CF1995C-Squaring-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/
 https://chumeng.xyz/%E8%BF%9E%E9%80%9A%E6%80%A7%E9%97%AE%E9%A2%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
 https://chumeng.xyz/CF2018C-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/
@@ -93,6 +94,7 @@ https://chumeng.xyz/tags/%E6%A8%A1%E6%9D%BF/
 https://chumeng.xyz/tags/%E9%A2%98%E8%A7%A3/
 https://chumeng.xyz/tags/%E9%80%92%E5%BD%92/
 https://chumeng.xyz/tags/%E6%A0%91%E4%B8%8A%E5%B7%AE%E5%88%86/
+https://chumeng.xyz/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/
 https://chumeng.xyz/categories/%E9%A2%98%E8%A7%A3/
 https://chumeng.xyz/categories/%E9%A2%98%E8%A7%A3/Codeforces/
 https://chumeng.xyz/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/
