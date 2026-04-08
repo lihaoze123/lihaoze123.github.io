@@ -1,0 +1,1138 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/mai.jpg">
+  <link rel="icon" href="/img/mai.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="chumeng">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本文是对于笔者实践经验的总结和社区讨论精华的总结。 本文假设读者已经大致使用&#x2F;了解过 Agentic Coding 相关工具，包括但不限于：Claude Code，Codex，Cursor，OpenClaw(小龙虾)。 引入 自 2022 年 ChatGPT 横空出世以来，软件工程领域发生了重大的变革，事实上，不仅在开发领域，AI 已经融入了大众的日常生活，包括但不限于：Deepseek，豆包等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现代软件开发 —— 基于 Harness Engineering 的 AI Native 开发模式">
+<meta property="og:url" content="https://chumeng.xyz/%E7%8E%B0%E4%BB%A3%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91-%E2%80%94%E2%80%94-%E5%9F%BA%E4%BA%8E-Harness-Engineering-%E7%9A%84-AI-Native-%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Chumeng&#39;s blog">
+<meta property="og:description" content="本文是对于笔者实践经验的总结和社区讨论精华的总结。 本文假设读者已经大致使用&#x2F;了解过 Agentic Coding 相关工具，包括但不限于：Claude Code，Codex，Cursor，OpenClaw(小龙虾)。 引入 自 2022 年 ChatGPT 横空出世以来，软件工程领域发生了重大的变革，事实上，不仅在开发领域，AI 已经融入了大众的日常生活，包括但不限于：Deepseek，豆包等">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-08T12:34:28.000Z">
+<meta property="article:modified_time" content="2026-04-08T12:38:17.446Z">
+<meta property="article:author" content="chumeng">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Agentic Coding">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>现代软件开发 —— 基于 Harness Engineering 的 AI Native 开发模式 - Chumeng&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chumeng.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>初梦</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="现代软件开发 —— 基于 Harness Engineering 的 AI Native 开发模式"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-08 20:34" pubdate>
+          2026年4月8日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          37 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">现代软件开发 —— 基于 Harness Engineering 的 AI Native 开发模式</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>本文是对于笔者实践经验的总结和社区讨论精华的总结。</p>
+<p>本文假设读者已经大致使用/了解过 Agentic Coding
+相关工具，包括但不限于：Claude
+Code，Codex，Cursor，OpenClaw(小龙虾)。</p>
+<h2 id="引入">引入</h2>
+<p>自 2022 年 ChatGPT
+横空出世以来，软件工程领域发生了重大的变革，事实上，不仅在开发领域，AI
+已经融入了大众的日常生活，包括但不限于：Deepseek，豆包等 AI
+对话产品。</p>
+<p>人工智能在开发领域的应用始于 Github Copilot
+这类生成式辅助编码工具，从其名称中可见其定位：AI
+作为副驾驶辅助人类编码。在这个阶段，人们对于使用 AI
+开发的理解仍然没有脱离单次提示生成代码，事实上早期的 AI 辅助开发产品和
+ChatGPT 没有本质区别。</p>
+<p>2024–2025 年，大型语言模型在编程领域的能力大幅跃升，典型产品为 Claude
+Sonnet
+3.5，它在多文件编辑，代码理解等能力上实现了质变，基础能力得到了突破。模型基础能力的提升使得以
+Cursor 为代表的 AI IDE 变得真正实用。</p>
+<p>在这个背景下，2025 年初，OpenAI 联合创始人 Andrej Karpathy 基于他对
+AI IDE 的使用体验，在 X 上提出了“Vibe
+coding”这个词，此处引用他的原话（见
+https://x.com/karpathy/status/1886192184808149383）：</p>
+<blockquote>
+<p>There’s a new kind of coding I call ‘vibe coding’, where you fully
+give in to the vibes, embrace exponentials, and forget that the code
+even exists. It's possible because the LLMs (e.g. Cursor Composer w
+Sonnet) are getting too good. 我把这种新的编程方式叫做 vibe
+coding，你完全顺应感觉，拥抱指数级增长，甚至忘记代码本身的存在。这之所以可能，是因为大型语言模型（比如
+Cursor Composer 搭配 Sonnet）变得太强大了。</p>
+</blockquote>
+<p>这个词汇在后续几周迅速点燃整个社区，这也标志着人们在使用 AI
+工具编码时开始将编码细节更大程度地交给 AI，而不再仔细 review
+代码（至少笔者的做法是这样的）。Agentic Coding
+的概念也开始深入人心。</p>
+<p>事实上，编程范式的转变，使得人们在工程实践上从关注 Prompt Engineering
+转变为 Context Engineering。到了 2026
+年初，一个新的工程概念开始在迅速传播，也即 Harness Engineering。</p>
+<p>本文将从个人开发者的视角出发，整理我对于 Harness Engineering
+的实践见解。</p>
+<h2 id="一vibe-coding-和-harness-engineering">一、Vibe Coding 和 Harness
+Engineering</h2>
+<h3 id="vibe-coding-的体验与局限">1.1 Vibe Coding 的体验与局限</h3>
+<p>可以说，Vibe Coding 确实降低了编程的门槛，从今日网络上随处可见的低质
+AI-generated
+项目可见一斑。即使对于不懂代码的用户，一句话也能生成一个高度可用的
+demo。但当项目从玩具级别的 demo
+进入生产级别的持续迭代时就会出现一些问题。</p>
+<p>在我的了解中，个人开发者通常会遇到这些问题：</p>
+<ul>
+<li><strong>Agent 不守规矩</strong>：在 CLAUDE.md
+中写的编码规范，几轮对话后 AI
+就忘了<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Zimon. 【学习笔记】Trellis-一个强大的 AI 脚手架. https://linux.do/t/topic/1803719">[2]</span></a></sup>。</li>
+<li><strong>修 A 坏 B</strong>：修一个 bug 引入另一个，AI
+缺乏全局视野<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Zimon. 【学习笔记】Trellis-一个强大的 AI 脚手架. https://linux.do/t/topic/1803719">[2]</span></a></sup>。</li>
+<li><strong>上下文腐朽</strong>：随着对话变长，模型的能力下降<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Viv Trivedy. *The Anatomy of an Agent Harness*. https://x.com/Vtrivedy10/article/2031408954517971368">[3]</span></a></sup>。
+^5a2a46</li>
+<li><strong>跨会话失忆</strong>：新会话要重新解释整个项目背景<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Anthropic. *Effective harnesses for long-running agents*. https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">[1]</span></a></sup>。</li>
+<li><strong>任务膨胀</strong>：只要一个按钮，但最后 AI 写了 9000
+行<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Zimon. 【学习笔记】Trellis-一个强大的 AI 脚手架. https://linux.do/t/topic/1803719">[2]</span></a></sup>。</li>
+</ul>
+<p>这些问题的根源不在于 prompt 写得不好，而在于 agent
+的运行环境缺乏约束。</p>
+<h3 id="三个层次的工程实践">1.2 三个层次的工程实践</h3>
+<p>基本上，AI
+编程的工程实践存在三个阶段<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Shuhan_Chengxiang. 浅谈 Harness Engineering. https://linux.do/t/topic/1874105">[5]</span></a></sup>：</p>
+<ol type="1">
+<li><strong>Prompt Engineering</strong>
+关注单次对话中如何措辞以得到更好的输出。</li>
+<li><strong>Context Engineering</strong>
+关注为模型提供合适的上下文，怎么合理地注入知识。</li>
+<li><strong>Harness Engineering</strong> 关注为 AI Agent
+构建怎样的运行环境，才能使其稳定做事。</li>
+</ol>
+<p>可以说，Harness Engineering
+进一步地将整个运行环境纳入工程化管理的范畴，对 AI Agent
+的运行环境进行工程化的改造，使 AI Agent 更稳定可靠。</p>
+<h3 id="harness-engineering-是什么">1.3 Harness Engineering 是什么</h3>
+<p>Harness 被引入到 AI Agent 领域，始于 Mitchell Hashimoto 于 2026 年 2
+月 5 日在个人博客中首次提出 “Engineer the Harness”
+的理念<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BosaBosa. 怎么都在说 Harness Engineering，什么是 Harness Engineering. https://linux.do/t/topic/1909881">[6]</span></a></sup>。六天后，OpenAI
+发布工程报告《Harness Engineering: Leveraging Codex in an Agent-First
+World》<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="OpenAI. *Harness Engineering: Leveraging Codex in an Agent-First World*. https://openai.com/index/harness-engineering/">[7]</span></a></sup>。2026
+年 3 月 24 日，Anthropic 发布了针对长时运行应用的 harness
+设计研究<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Anthropic. *Harness design for long-running application development*. https://www.anthropic.com/engineering/harness-design-long-running-apps">[8]</span></a></sup>。此后，这个词因为其生动性迅速在社区中病毒式传播，Claude
+Code 的源码泄露事件进一步加剧了关于 Agent harness 设计的讨论（通常认为
+Claude Code 是 harness
+设计的典范）。<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BosaBosa. 怎么都在说 Harness Engineering，什么是 Harness Engineering. https://linux.do/t/topic/1909881">[6]</span></a></sup></p>
+<p>Harness 的含义可以用一个公式概括：<strong>Agent = Model +
+Harness。</strong><sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Viv Trivedy. *The Anatomy of an Agent Harness*. https://x.com/Vtrivedy10/article/2031408954517971368">[3]</span></a></sup></p>
+<p>这个公式来自 LangChain 工程师的文章（见
+<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Viv Trivedy. *The Anatomy of an Agent Harness*. https://x.com/Vtrivedy10/article/2031408954517971368">[3]</span></a></sup>）。当
+harness
+为模型提供了状态、工具执行、反馈闭环和可强制执行的约束后，它就可以称作
+Agent。</p>
+<p>具体来说，harness
+包括<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Viv Trivedy. *The Anatomy of an Agent Harness*. https://x.com/Vtrivedy10/article/2031408954517971368">[3]</span></a></sup>：</p>
+<ul>
+<li>System Prompts</li>
+<li>Tools、Skills、MCP 及其描述</li>
+<li>基础设施（文件系统、沙箱、浏览器）</li>
+<li>编排逻辑（子 agent 调度、模型路由）</li>
+<li>Hooks / 中间件（e.g. lint 检查）</li>
+</ul>
+<p>Harness Engineering
+不完全算是一个全新的发明。可以说，它是软件工程和工程控制论的原则在 AI
+Agent
+中的延伸，并且很好的总结了当前阶段的某些最佳工程实践（是否最佳仍然需要时间检验）。<sup id="fnref:11" class="footnote-ref"><a href="#fn:11" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="chumeng. harness 是互联网公司重新发明的新词还是有独特的创新之处. https://linux.do/t/topic/1906915">[11]</span></a></sup></p>
+<p>根据与具体项目的关联程度，harness 可以分为三层（来自 <a
+target="_blank" rel="noopener" href="https://linux.do/u/bosa">BosaBosa</a>
+的见解<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BosaBosa. 怎么都在说 Harness Engineering，什么是 Harness Engineering. https://linux.do/t/topic/1909881">[6]</span></a></sup>）：</p>
+<blockquote>
+<ol type="1">
+<li><strong>通用 harness 层</strong>：与具体项目弱相关，属于 agent
+runtime / framework 的通用能力。包括终端交互、tool
+loop、权限系统、记忆、线程持久化、context
+compaction、hooks、任务调度。各大 Agent CLI（Claude
+Code、Codex、OpenCode）已在这一层做了大量工作。</li>
+<li><strong>项目 harness
+层</strong>：与具体项目强相关，但不是业务功能本身。包括 AGENTS.md /
+CLAUDE.md、仓库知识布局、架构边界、lint
+规则、质量标准、依赖选择原则、文档索引。OpenAI
+的实践报告中最有参考价值的创新集中在这一层<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="OpenAI. *Harness Engineering: Leveraging Codex in an Agent-First World*. https://openai.com/index/harness-engineering/">[7]</span></a></sup>。</li>
+<li><strong>任务/运行 harness
+层</strong>：与当前这次具体工作强相关。例如 Anthropic 设计的
+planner-generator-evaluator 三 agent
+架构<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Anthropic. *Harness design for long-running application development*. https://www.anthropic.com/engineering/harness-design-long-running-apps">[8]</span></a></sup>、跨
+session 文档交接、QA prompt、Playwright 检查脚本。</li>
+</ol>
+</blockquote>
+<p>对于个人开发者而言，通用 harness 层已由工具提供，本文更多针对
+<strong>项目 harness 层</strong> 进行讨论。</p>
+<h2 id="二个人开发者的-harness-实践">二、个人开发者的 Harness 实践</h2>
+<p>本节介绍社区讨论中提出的，对于个人开发者实践的一些实用原则。</p>
+<h3 id="配置层">2.1 配置层</h3>
+<p>配置层的核心载体是 CLAUDE.md（或其他工具中的 AGENTS.md）。</p>
+<p>以下是来自 <a target="_blank" rel="noopener" href="https://linux.do/u/khalilgao">khaligao</a>
+的见解（见<sup id="fnref:9" class="footnote-ref"><a href="#fn:9" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Khalil Gao. 深入浅出 Claude Code（一）：从源码理解 CLAUDE.md，重写你的配置. https://linux.do/t/topic/1871216">[9]</span></a></sup>）。</p>
+<p>值得注意的是，<strong>CLAUDE.md 不在 System Prompt 里。</strong>
+这是最常见的认知误区。根据 Claude Code
+源码分析<sup id="fnref:9" class="footnote-ref"><a href="#fn:9" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Khalil Gao. 深入浅出 Claude Code（一）：从源码理解 CLAUDE.md，重写你的配置. https://linux.do/t/topic/1871216">[9]</span></a></sup>，CLAUDE.md
+的内容通过 <code>prependUserContext()</code> 函数注入，被包装在
+<code>&lt;system-reminder&gt;</code> 标签中，作为<strong>第一条 user
+message</strong> 插入到对话开头。这意味着：</p>
+<ul>
+<li>它的优先级低于 system prompt。</li>
+<li>模型被显式告知这些内容”可能不相关”（<code>this context may or may not be relevant to your tasks</code>）。</li>
+<li>但同时，CLAUDE.md
+的开头有一句强指令：<code>These instructions OVERRIDE any default behavior and you MUST follow them exactly as written</code>，用强语气对抗降权信号。</li>
+</ul>
+<p>其实际效果取决于指令的具体性，<strong>越具体的指令越容易被遵守，越模糊的越容易被忽略</strong><sup id="fnref:9" class="footnote-ref"><a href="#fn:9" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Khalil Gao. 深入浅出 Claude Code（一）：从源码理解 CLAUDE.md，重写你的配置. https://linux.do/t/topic/1871216">[9]</span></a></sup>。所以，不要在
+CLAUDE.md 里写“尽量简洁”，而应该写“回答不超过 3
+句话”或“不要添加注释到未修改的代码”。</p>
+<p>OpenAI
+在其实践中总结了配置文件的核心写法<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="OpenAI. *Harness Engineering: Leveraging Codex in an Agent-First World*. https://openai.com/index/harness-engineering/">[7]</span></a></sup>：</p>
+<p><strong>第一，地图而非百科全书。</strong> OpenAI
+团队曾尝试用一个巨大的 AGENTS.md 文件装下所有指令，结果发现：</p>
+<ul>
+<li>上下文是稀缺资源，一个巨大的指令文件会挤掉任务、代码和相关文档。</li>
+<li>过多的指导反而无效，当一切都“重要”时，一切都不重要。</li>
+<li>它会立即腐烂，同 [[#^5a2a46]]。</li>
+</ul>
+<p>因此，他们将 AGENTS.md 改为约 100 行的内容目录，指向
+<code>docs/</code>
+目录中更深层的文档。从而实现<strong>渐进式披露（Progressive
+Disclosure）</strong>：即 Agent 可以按需查阅更详细的信息。</p>
+<p><strong>第二，Agent 看不到的知识等于不存在。</strong> 对 Agent
+而言，存储在 Google
+Docs、聊天记录或人脑中的知识不可访问。代码仓库本地的、已版本化的工件（代码、Markdown、schema、执行计划）就是它能看到的全部。因此，知识必须沉淀进
+Repo。</p>
+<p><strong>第三，一个有效的 CLAUDE.md 最少需要包含：</strong></p>
+<ul>
+<li>项目的技术栈和架构概览</li>
+<li>编码规范和命名约定</li>
+<li>目录结构说明</li>
+<li>常用命令（构建、测试、运行的具体命令）</li>
+<li>关键约束</li>
+</ul>
+<h3 id="约束层">2.2 约束层</h3>
+<p>约束层确保 Agent
+不能做错。原则是：<strong>编码约束优于自然语言指令</strong>。</p>
+<p><strong>Lint / Formatter 自动执行代码风格。</strong> 不要简单的在
+CLAUDE.md 中写“请保持优雅的代码风格”，取而代之的是应该配置好
+ESLint、Prettier、Ruff 等工具，让代码风格在保存或提交时通过 Hook
+自动执行。</p>
+<p><strong>架构不变量通过自定义 lint 强制执行。</strong> OpenAI
+在其完全由 Agent 生成的代码库中的实践：每个业务域划分为固定的层（Types →
+Config → Repo → Service → Runtime →
+UI），依赖方向经过严格验证，仅允许有限的边。这些约束通过自定义 linter
+和结构测试强制执行。</p>
+<p>OpenAI 还指出了一个做法：由于这些 lint
+是自定义的，他们编写错误信息时会在 Agent
+上下文中注入修复指令<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="OpenAI. *Harness Engineering: Leveraging Codex in an Agent-First World*. https://openai.com/index/harness-engineering/">[7]</span></a></sup>。也即，当
+Agent 触发了一个自定义 lint
+规则时，错误信息本身就包含了如何修复的指导。</p>
+<p><strong>CI 作为 Agent 输出的质量闸门。</strong> 当 Agent
+生成的代码无法通过
+CI，错误信息会回传到上下文中，形成一个自我修正的闭环。OpenAI
+团队专门配置了 linter 和 CI
+来验证知识库的更新状况、是否已交叉链接且结构正确<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="OpenAI. *Harness Engineering: Leveraging Codex in an Agent-First World*. https://openai.com/index/harness-engineering/">[7]</span></a></sup>。</p>
+<p><strong>JSON 比 Markdown 更不容易被篡改。</strong> Anthropic
+在其长时运行 Agent 的实践中发现，用 JSON
+格式存储特性列表时，模型不太会不当地修改或覆盖文件内容；而 Markdown
+格式下，模型更容易删除或编辑条目<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Anthropic. *Effective harnesses for long-running agents*. https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">[1]</span></a></sup>。</p>
+<p><strong>文件系统边界。</strong> 通过目录结构本身限制 Agent
+的修改范围。</p>
+<h3 id="沉淀层">2.3 沉淀层</h3>
+<p>沉淀层让 harness 可以“自我进化”。核心机制可以说是：<strong>每次 bug
+修复都变成规则更新</strong>。</p>
+<p>这正是 Mitchell Hashimoto 最初对于 harness 的阐释，事实上，最初
+harness 用来指代“每当发现 Agent
+犯错，就花时间设计一个解决方案，让它永远不再犯同样的错误”这件事<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BosaBosa. 怎么都在说 Harness Engineering，什么是 Harness Engineering. https://linux.do/t/topic/1909881">[6]</span></a></sup>。</p>
+<p>社区开源的工具 <strong>Trellis</strong>
+提供了一个参考范式<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Zimon. 【学习笔记】Trellis-一个强大的 AI 脚手架. https://linux.do/t/topic/1803719">[2]</span></a></sup>。使用
+Trellis 框架时，修复一个 bug 后执行 <code>/break-loop</code>
+命令，系统会分析这次 bug 的根因，然后用户手动编辑
+<code>.trellis/spec/</code> 目录下的 spec 文件，将新规则提交到
+git。这个流程的本质是将隐性经验转化为显性规则，并通过版本控制使其持久化（也即沉淀）。</p>
+<p>类似的，Anthropic 在其研究中指出，长时运行 Agent 的核心挑战在于每个新
+session
+都从零开始<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Anthropic. *Effective harnesses for long-running agents*. https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">[1]</span></a></sup>。他们的解决方案是让
+Agent 在每次 session 结束时将进度写入 <code>progress.txt</code>
+文件并提交 git commit，下一个 session 的 Agent
+通过读取这些文件快速了解项目状态。</p>
+<p>OpenAI 也采用了类似的做法：执行计划被视为一流的工件（first-class
+artifacts），活跃计划、已完成计划和已知的技术债务都进行版本控制并集中存放<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="OpenAI. *Harness Engineering: Leveraging Codex in an Agent-First World*. https://openai.com/index/harness-engineering/">[7]</span></a></sup>，使得
+Agent 能够在不依赖外部上下文的情况下运行。</p>
+<p>这中沉淀的效果<strong>是复利式的：</strong>
+项目越久，积累的规则越多，Agent 犯同类错误的概率就越低。</p>
+<h2 id="三harness-的工具生态">三、Harness 的工具生态</h2>
+<h3 id="几种-harness-开源方案">3.1 几种 Harness 开源方案</h3>
+<p>当前个人开发者可选的 harness
+工具和方案大致可分为三种<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BeMxself. 想开一个 harness engineering 实践的长期帖子，大家一起分享实践经验. https://linux.do/t/topic/1791588">[4]</span></a></sup>：</p>
+<p><strong>纯配置方案。</strong> 最轻量的起点是直接编写 CLAUDE.md /
+AGENTS.md，配合
+superpowers<sup id="fnref:10" class="footnote-ref"><a href="#fn:10" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="obra. superpowers skills. https://github.com/obra/superpowers">[10]</span></a></sup>
+等 skill 集合。这一方案的核心是把配置层和约束层的实践手动落地。</p>
+<p><strong>框架增强方案。</strong>
+Trellis<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Zimon. 【学习笔记】Trellis-一个强大的 AI 脚手架. https://linux.do/t/topic/1803719">[2]</span></a></sup>
+和
+ccg-workflow<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BeMxself. 想开一个 harness engineering 实践的长期帖子，大家一起分享实践经验. https://linux.do/t/topic/1791588">[4]</span></a></sup>
+等框架在配置层之上增加了 spec 系统和 hook 自动注入能力。以 Trellis
+为例，它通过三个 hook
+时机（session-start、inject-subagent-context、ralph-loop）确保 spec
+文档在每次对话中都被使用，而不是写完就被遗忘。Trellis
+选择将沉淀层系统化：spec 通过 hook
+自动注入到每次交互中的强制上下文。</p>
+<p><strong>多角色编排方案。</strong>
+oh-my-claudecode、oh-my-opencode<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BeMxself. 想开一个 harness engineering 实践的长期帖子，大家一起分享实践经验. https://linux.do/t/topic/1791588">[4]</span></a></sup>
+等套件定义了多种 agent 角色（planner、executor、reviewer、debugger
+等），实现了角色分工和多 agent 协作。</p>
+<p>在个人实践中，通常做好配置层（写好 CLAUDE.md，配好 lint，让 Agent
+清楚规矩）即可。对于持续迭代的项目，通常可以涉及配置层 + 约束层 + 适度的
+spec 沉淀即可。对于长期项目，可以考虑 Trellis 等增强框架。</p>
+<p>一个可供参考的判断方法<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BeMxself. 想开一个 harness engineering 实践的长期帖子，大家一起分享实践经验. https://linux.do/t/topic/1791588">[4]</span></a></sup>：如果在项目中花了大量时间在维护
+Harness 本身（编辑计划文件、更新进度文档、协调 Agent
+之间的通信）而实际代码产出很少，说明 Harness
+已经变成了负担而非助力。</p>
+<h3 id="个人开发者的常见陷阱">3.2 个人开发者的常见陷阱</h3>
+<p><strong>不要追求一步到位的完美 harness。</strong> Anthropic 在其
+Harness
+设计研究中明确提出了一个原则<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Anthropic. *Harness design for long-running application development*. https://www.anthropic.com/engineering/harness-design-long-running-apps">[8]</span></a></sup>：</p>
+<blockquote>
+<p>Find the simplest solution possible, and only increase complexity
+when needed. 找到最简方案，只在必要时增加复杂度。</p>
+</blockquote>
+<p><strong>不要忽视模型差异。</strong> Anthropic 的实践中，Claude Sonnet
+4.5
+表现出明显的“上下文焦虑”，当它认为接近上下文限制时，会过早地结束工作。对于这个模型，重置必要的。而
+Claude Opus 4.5/4.6
+在很大程度上自行解决了这个问题，使得压缩对话上下文成为了更好的选择。不同模型需要不同的上下文管理策略，同一套
+Harness 配置不一定在所有模型上都有效。</p>
+<p><strong>多 Agent 不等于更好。</strong>
+多角色编排方案会增加通信开销和协调复杂度。对于个人开发者的大多数场景，单
+Agent 配合好的约束会比多 agent
+更可控。在社区中的讨论中<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="BeMxself. 想开一个 harness engineering 实践的长期帖子，大家一起分享实践经验. https://linux.do/t/topic/1791588">[4]</span></a></sup>：oh-my-opencode
+等套件定义了十多种 agent 角色，但在实际使用中，发现 codex + superpowers
+的简单组合反而效率更高。</p>
+<h2 id="四从-vibe-coding-到-harness-driven-development">四、从 Vibe
+Coding 到 Harness-Driven Development</h2>
+<p>总体来说，个人开发者的 Harness 实践包括以下阶段：Vibe
+Coding，配置驱动，约束驱动，Spec
+沉淀，体系化。随着项目的规模，逐次向下递进，应当会使 Agentic Coding
+效果产生显著改善。</p>
+<p>可以确定的是，好的环境配置、正确的工具、持久化状态和验证闭环能让任何模型更高效。</p>
+<p>然而，值得注意的是，Harness
+说到底是在模型智能的基础上构建系统，随着模型基础能力的提升，Harness
+的部分组件应该能够简化甚至移除。</p>
+<p>Anthropic
+的研究对此的原话<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="Anthropic. *Harness design for long-running application development*. https://www.anthropic.com/engineering/harness-design-long-running-apps">[8]</span></a></sup>是：</p>
+<blockquote>
+<p>every component in a harness encodes an assumption about what the
+model can't do on its own, and those assumptions are worth stress
+testing, both because they may be incorrect, and because they can
+quickly go stale as models improve. Harness
+的每一个组件都编码了对模型自身能力的某种假设，这些假设值得反复验证，因为它们可能本来就是错的，也可能很快会因模型进步而过时。</p>
+</blockquote>
+<p>总而言之，在具体实践中，Harness
+设计成怎样的复杂程度需要辩证考虑。</p>
+<h2 id="结语">结语</h2>
+<p>在现代软件开发 AI Native
+的开发模式下，个人开发者的工作重心不再是逐行编写实现代码，而是设计一个环境，让
+Agent 能够可靠地完成编码工作。</p>
+<p>可以预见，个人开发者应当具有一些基本素养，包括：系统思维、规范能力等“驾驭能力”。在
+Harness Engineering
+其命名中就能看出：最好的代码也许不是人写的，但是一定是人“驾驭”出来的。</p>
+<p>自从 ChatGPT 横空出世以来，就经常会有”AI
+取代人类”的论调。虽然并非毫无道理，可以确定的是，只会死板地背诵 CRUD
+的初级程序员将会，或已经被 AI
+取代，然而，高级工程师因擅长”驾驭”会在未来发挥更强的作用。</p>
+<p>在历史上，珍妮纺纱机的发明让纺织业发生了天翻地覆的变化，传统的手工纺纱女工被机器大量取代。然而，纺织业并没有因此消亡，反而催生了一个新的角色：负责操作、调试和维护机器的技术工人。</p>
+<p>私认为，今天的软件开发正在经历类似的转变：AI Agent
+取代的是“编码”本身，而“驾驭”能力将会成为新的核心能力。</p>
+<h2 id="参考资料">参考资料</h2>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>Anthropic. <em>Effective
+harnesses for long-running agents</em>.
+https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2" class="footnote-text"><span>Zimon.
+【学习笔记】Trellis-一个强大的 AI 脚手架.
+https://linux.do/t/topic/1803719
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:3" class="footnote-text"><span>Viv Trivedy. <em>The Anatomy
+of an Agent Harness</em>.
+https://x.com/Vtrivedy10/article/2031408954517971368
+<a href="#fnref:3" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:4" class="footnote-text"><span>BeMxself. 想开一个 harness
+engineering 实践的长期帖子，大家一起分享实践经验.
+https://linux.do/t/topic/1791588
+<a href="#fnref:4" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:5" class="footnote-text"><span>Shuhan_Chengxiang. 浅谈
+Harness Engineering. https://linux.do/t/topic/1874105
+<a href="#fnref:5" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:6" class="footnote-text"><span>BosaBosa. 怎么都在说 Harness
+Engineering，什么是 Harness Engineering.
+https://linux.do/t/topic/1909881
+<a href="#fnref:6" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:7" class="footnote-text"><span>OpenAI. <em>Harness
+Engineering: Leveraging Codex in an Agent-First World</em>.
+https://openai.com/index/harness-engineering/
+<a href="#fnref:7" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:8" class="footnote-text"><span>Anthropic. <em>Harness
+design for long-running application development</em>.
+https://www.anthropic.com/engineering/harness-design-long-running-apps
+<a href="#fnref:8" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:9" class="footnote-text"><span>Khalil Gao. 深入浅出 Claude
+Code（一）：从源码理解 CLAUDE.md，重写你的配置.
+https://linux.do/t/topic/1871216
+<a href="#fnref:9" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:10" class="footnote-text"><span>obra. superpowers skills.
+https://github.com/obra/superpowers
+<a href="#fnref:10" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:11" class="footnote-text"><span>chumeng. harness
+是互联网公司重新发明的新词还是有独特的创新之处.
+https://linux.do/t/topic/1906915
+<a href="#fnref:11" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
+      
+        <a href="/tags/Agentic-Coding/" class="print-no-link">#Agentic Coding</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>现代软件开发 —— 基于 Harness Engineering 的 AI Native 开发模式</div>
+      <div>https://chumeng.xyz/现代软件开发-——-基于-Harness-Engineering-的-AI-Native-开发模式/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>chumeng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年4月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Luogu-P4555-%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F-%E6%9C%80%E9%95%BF%E5%8F%8C%E5%9B%9E%E6%96%87%E4%B8%B2-%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" title="Luogu P4555 [国家集训队] 最长双回文串 解题报告">
+                        <span class="hidden-mobile">Luogu P4555 [国家集训队] 最长双回文串 解题报告</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
